@@ -11,19 +11,13 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Document
-public class Candidate {
+public class Position {
     @Id
     private String id;
     private String name;
-    private String surname;
+    private double salary;
     private List<Skill> skills;
-
-    public Candidate(String name, String surname, List<Skill> skills) {
-        this.name = name;
-        this.surname = surname;
-        this.skills = skills;
-    }
 }
