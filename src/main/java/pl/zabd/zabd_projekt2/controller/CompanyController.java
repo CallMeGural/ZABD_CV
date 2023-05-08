@@ -1,8 +1,10 @@
 package pl.zabd.zabd_projekt2.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.dto.CompanyDto;
@@ -30,6 +32,19 @@ public class CompanyController {
     @PostMapping
     public String addCompany(CompanyDto dto) {
         companyService.addCompany(dto);
+        return "redirect:/company/list";
+    }
+
+    @GetMapping("{id}")
+    public String getCompanyById(@PathVariable String id, Model model) {
+        model.addAttribute("company",companyService.getCompanyById(id));
+        return "companyEdit";
+    }
+
+    @PutMapping
+    public String updateCompany(@Valid Company company, Errors errors) {
+        if(errors.hasErrors()) return "companyEdit";
+        companyService.updateCompany(company);
         return "redirect:/company/list";
     }
 

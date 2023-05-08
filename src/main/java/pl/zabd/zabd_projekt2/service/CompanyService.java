@@ -28,4 +28,15 @@ public class CompanyService {
     public void deleteCompany(String id) {
         companyRepository.deleteById(id);
     }
+
+    public Company getCompanyById(String id) {
+        return companyRepository.findById(id).orElseThrow();
+    }
+
+    public void updateCompany(Company company) {
+        Company update = getCompanyById(company.getId());
+        update.setName(company.getName());
+        update.setHrs(company.getHrs());
+        companyRepository.save(update);
+    }
 }
