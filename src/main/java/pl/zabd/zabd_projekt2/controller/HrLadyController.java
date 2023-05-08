@@ -1,11 +1,12 @@
 package pl.zabd.zabd_projekt2.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.HrLady;
 import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
 import pl.zabd.zabd_projekt2.service.HrLadyService;
@@ -32,5 +33,24 @@ public class HrLadyController {
     @PostMapping
     public HrLady addHrLady(HrLadyDto dto) {
         return hrService.addHrLady(dto);
+    }
+
+    @GetMapping("{id}")
+    public String getCompanyById(@PathVariable String id, Model model) {
+        model.addAttribute("hrLady",hrService.getHrById(id));
+        return "hrEdit";
+    }
+
+    @PutMapping
+    public String updateCompany(@Valid HrLady hrLady, Errors errors) {
+        if(errors.hasErrors()) return "hrEdit";
+        hrService.updateHr(hrLady);
+        return "redirect:/hrs/list";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCompany(@PathVariable String id) {
+        hrService.deleteHr(id);
+        return "redirect:/hrs/list";
     }
 }

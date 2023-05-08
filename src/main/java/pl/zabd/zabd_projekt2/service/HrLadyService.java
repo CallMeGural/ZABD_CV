@@ -24,4 +24,19 @@ public class HrLadyService {
         hrLady.setPositions(dto.getPositions());
         return hrRepository.insert(hrLady);
     }
+
+    public HrLady getHrById(String id) {
+        return hrRepository.findById(id).orElseThrow();
+    }
+
+    public void updateHr(HrLady hrLady) {
+        HrLady update = getHrById(hrLady.getId());
+        update.setPositions(hrLady.getPositions());
+        update.setName(hrLady.getName());
+        hrRepository.save(update);
+    }
+
+    public void deleteHr(String id) {
+        hrRepository.deleteById(id);
+    }
 }
