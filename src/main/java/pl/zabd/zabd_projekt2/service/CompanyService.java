@@ -24,4 +24,8 @@ public class CompanyService {
         company.setHrs(dto.getHrs());
         return companyRepository.insert(company);
     }
+
+    public void deleteCompany(String id) {
+        companyRepository.deleteById(id);
+    }
 }

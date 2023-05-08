@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+import java.util.HashMap;
 
 @Getter
 @Setter
@@ -19,9 +19,9 @@ public class Candidate {
     private String id;
     private String name;
     private String surname;
-    private List<Skill> skills;
+    private HashMap<Skill,IExperience> skills;
 
-    public Candidate(String name, String surname, List<Skill> skills) {
+    public Candidate(String name, String surname, HashMap<Skill, IExperience> skills) {
         this.name = name;
         this.surname = surname;
         this.skills = skills;

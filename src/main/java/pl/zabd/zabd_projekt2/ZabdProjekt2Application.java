@@ -10,6 +10,7 @@ import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.repository.CandidateRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @SpringBootApplication
@@ -23,7 +24,7 @@ public class ZabdProjekt2Application {
     @Bean
     CommandLineRunner runner(CandidateRepository repository) {
         return args -> {
-            repository.insert(new Candidate("Jan","Nowak",new ArrayList<>()));
+            repository.insert(new Candidate("Jan","Nowak",new HashMap<>()));
         };
     }
 }

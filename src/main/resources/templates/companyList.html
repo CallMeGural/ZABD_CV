@@ -21,12 +21,12 @@
     <td th:text="${company.name}">NAME</td>
     <td th:text="${company.hrs}">HRS</td>
     <td>
-      <a th:href="@{/companies/{id}(id=${company.id})}">
+      <a th:href="@{/company/{id}(id=${company.id})}">
         <input type="submit" value="Edytuj"/>
       </a>
     </td>
     <td>
-      <form th:action="@{/companies/{id}(id=${company.id})}" th:method="DELETE">
+      <form th:action="@{/company/{id}(id=${company.id})}" th:method="DELETE">
         <input type = "submit" value="Usuń"/>
       </form>
     </td>
@@ -35,7 +35,7 @@
 
 
 <a th:href="@{/}"><input type="submit" value="Menu"/></a>
-<a th:href="@{/companies/form}"><input type="submit" value="Utwórz firme"/></a>
+<a th:href="@{/company/form}"><input type="submit" value="Utwórz firme"/></a>
 </body>
 
 </html>

@@ -25,4 +25,21 @@ public class CandidateService {
         candidate.setSkills(dto.getSkills());
         return  candidateRepository.insert(candidate);
     }
+
+    public void deleteCandidate(String id) {
+        candidateRepository.deleteById(id);
+    }
+
+    public Candidate getCandidateById(String id) {
+        return candidateRepository.findById(id).orElseThrow();
+    }
+
+    public void updateCandidate(Candidate candidate) {
+        Candidate update = getCandidateById(candidate.getId());
+        update.setSkills(candidate.getSkills());
+        update.setName(candidate.getName());
+        update.setSurname(candidate.getSurname());
+        candidateRepository.save(update);
+
+    }
 }
