@@ -21,7 +21,7 @@ public class CandidateController {
 
     private final CandidateService candidateService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String fetchAllCandidates(Model model) {
         model.addAttribute("candidates",candidateService.getAllCandidates());
         return "candidateList";

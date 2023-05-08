@@ -18,7 +18,7 @@ public class SkillController {
 
     private final SkillService skillService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String fetchAllSkills(Model model) {
         model.addAttribute("skills",skillService.getAllSkills());
         return "skillList";

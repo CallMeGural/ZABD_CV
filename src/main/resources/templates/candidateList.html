@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista kandydatow</title>
+</head>
+
+<body>
+
+<h1>Lista kandydatow</h1>
+
+<table>
+  <tr>
+    <th>Imie</th>
+    <th>Nazwisko</th>
+    <th>Umiejetnosci</th>
+    <th>Edytuj</th>
+    <th>Usuń</th>
+  </tr>
+  <tr th:each ="candidate : ${candidates}">
+    <td th:text="${candidate.name}">NAME</td>
+    <td th:text="${candidate.surname}">SURNAME</td>
+    <td th:text="${candidate.skills}">SKILLS</td>
+    <td>
+      <a th:href="@{/candidates/{id}(id=${candidate.id})}">
+        <input type="submit" value="Edytuj"/>
+      </a>
+    </td>
+    <td>
+      <form th:action="@{/candidates/{id}(id=${candidate.id})}" th:method="DELETE">
+        <input type = "submit" value="Usuń"/>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+<a th:href="@{/}"><input type="submit" value="Menu"/></a>
+<a th:href="@{/candidates/form}"><input type="submit" value="Utwórz kandydata"/></a>
+</body>
+
+</html>

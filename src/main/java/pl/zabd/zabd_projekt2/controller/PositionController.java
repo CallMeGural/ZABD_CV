@@ -19,7 +19,7 @@ public class PositionController {
 
     private final PositionService positionService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String fetchAllHrs(Model model) {
         model.addAttribute("hrs",positionService.getAllPositions());
         return "positionList";

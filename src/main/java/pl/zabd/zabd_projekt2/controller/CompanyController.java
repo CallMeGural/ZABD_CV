@@ -17,7 +17,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String fetchAllCompanies(Model model) {
         model.addAttribute("companies",companyService.getAllCompanies());
         return "companyList";

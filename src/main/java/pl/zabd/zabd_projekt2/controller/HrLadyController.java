@@ -17,7 +17,7 @@ public class HrLadyController {
 
     private final HrLadyService hrService;
 
-    @GetMapping
+    @GetMapping("/list")
     public String fetchAllHrs(Model model) {
         model.addAttribute("hrs",hrService.getAllHrs());
         return "hrList";

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista posad</title>
+</head>
+
+<body>
+
+<h1>Lista posad</h1>
+
+<table>
+  <tr>
+    <th>Nazwa</th>
+    <th>Wyplata</th>
+    <th>Umiejetnosci</th>
+    <th>Edytuj</th>
+    <th>Usuń</th>
+  </tr>
+  <tr th:each ="position : ${positions}">
+    <td th:text="${position.name}">NAME</td>
+    <td th:text="${position.salary}">SALARY</td>
+    <td th:text="${position.skills}">SKILLS</td>
+    <td>
+      <a th:href="@{/positions/{id}(id=${position.id})}">
+        <input type="submit" value="Edytuj"/>
+      </a>
+    </td>
+    <td>
+      <form th:action="@{/positions/{id}(id=${position.id})}" th:method="DELETE">
+        <input type = "submit" value="Usuń"/>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+<a th:href="@{/}"><input type="submit" value="Menu"/></a>
+<a th:href="@{/positions/form}"><input type="submit" value="Utwórz posade"/></a>
+</body>
+
+</html>

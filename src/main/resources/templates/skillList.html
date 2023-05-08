@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista umiejetnosci</title>
+</head>
+
+<body>
+
+<h1>Lista umiejetnosci</h1>
+
+<table>
+  <tr>
+    <th>Nazwa</th>
+    <th>Doswiadczenie</th>
+    <th>Edytuj</th>
+    <th>Usuń</th>
+  </tr>
+  <tr th:each ="skill : ${skills}">
+    <td th:text="${skill.name}">NAME</td>
+    <td th:text="${skill.experience}">EXPERIENCE</td>
+    <td>
+      <a th:href="@{/skills/{id}(id=${skill.id})}">
+        <input type="submit" value="Edytuj"/>
+      </a>
+    </td>
+    <td>
+      <form th:action="@{/skills/{id}(id=${skill.id})}" th:method="DELETE">
+        <input type = "submit" value="Usuń"/>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+<a th:href="@{/}"><input type="submit" value="Menu"/></a>
+<a th:href="@{/skills/form}"><input type="submit" value="Utwórz umiejetnosc"/></a>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista HR</title>
+</head>
+
+<body>
+
+<h1>Lista HR</h1>
+
+<table>
+  <tr>
+    <th>Nazwa</th>
+    <th>Pozycje</th>
+    <th>Edytuj</th>
+    <th>Usuń</th>
+  </tr>
+  <tr th:each ="hr : ${hrs}">
+    <td th:text="${hr.name}">NAME</td>
+    <td th:text="${hr.positions}">POSITIONS</td>
+    <td>
+      <a th:href="@{/hrs/{id}(id=${hr.id})}">
+        <input type="submit" value="Edytuj"/>
+      </a>
+    </td>
+    <td>
+      <form th:action="@{/hrs/{id}(id=${hr.id})}" th:method="DELETE">
+        <input type = "submit" value="Usuń"/>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+<a th:href="@{/}"><input type="submit" value="Menu"/></a>
+<a th:href="@{/hrs/form}"><input type="submit" value="Utwórz HR"/></a>
+</body>
+
+</html>
