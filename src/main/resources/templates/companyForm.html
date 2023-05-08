@@ -8,7 +8,7 @@
 
 <h1>Dodaj firme</h1>
 
-<form method="POST" th:action="@{/company}" th:object="${company}">
+<form method="POST" th:action="@{/companies}" th:object="${company}">
 
   <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
@@ -26,7 +26,7 @@
   <input type="submit" value="Utworz firme"/>
 </form>
 
-<a th:href="@{/company/list}"><input type="submit" value="Menu"/></a>
+<a th:href="@{/companies/list}"><input type="submit" value="Menu"/></a>
 
 </body>
 </html>

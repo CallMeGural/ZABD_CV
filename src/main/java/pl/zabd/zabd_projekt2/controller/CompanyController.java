@@ -12,7 +12,7 @@ import pl.zabd.zabd_projekt2.service.CompanyService;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/company")
+@RequestMapping("/companies")
 public class CompanyController {
 
     private final CompanyService companyService;
@@ -32,7 +32,7 @@ public class CompanyController {
     @PostMapping
     public String addCompany(CompanyDto dto) {
         companyService.addCompany(dto);
-        return "redirect:/company/list";
+        return "redirect:/companies/list";
     }
 
     @GetMapping("{id}")
@@ -45,12 +45,12 @@ public class CompanyController {
     public String updateCompany(@Valid Company company, Errors errors) {
         if(errors.hasErrors()) return "companyEdit";
         companyService.updateCompany(company);
-        return "redirect:/company/list";
+        return "redirect:/companies/list";
     }
 
     @DeleteMapping("/{id}")
     public String deleteCompany(@PathVariable String id) {
         companyService.deleteCompany(id);
-        return "redirect:/company/list";
+        return "redirect:/companies/list";
     }
 }
