@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.zabd.zabd_projekt2.model.Candidate;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
 import pl.zabd.zabd_projekt2.service.CandidateService;
+import pl.zabd.zabd_projekt2.service.SkillService;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class CandidateController {
 
     private final CandidateService candidateService;
+    private final SkillService skillService;
 
     @GetMapping("/list")
     public String fetchAllCandidates(Model model) {
@@ -29,6 +31,7 @@ public class CandidateController {
     @GetMapping("/form")
     public String addCandidateForm(Model model) {
         model.addAttribute("candidate",new CandidateDto());
+        model.addAttribute("skills",skillService.getAllSkills());
         return "candidateForm";
     }
 

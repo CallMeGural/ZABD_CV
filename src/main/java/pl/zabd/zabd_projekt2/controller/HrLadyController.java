@@ -10,6 +10,7 @@ import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.HrLady;
 import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
 import pl.zabd.zabd_projekt2.service.HrLadyService;
+import pl.zabd.zabd_projekt2.service.PositionService;
 
 @Controller
 @RequestMapping("/hrs")
@@ -17,6 +18,7 @@ import pl.zabd.zabd_projekt2.service.HrLadyService;
 public class HrLadyController {
 
     private final HrLadyService hrService;
+    private final PositionService positionService;
 
     @GetMapping("/list")
     public String fetchAllHrs(Model model) {
@@ -27,6 +29,7 @@ public class HrLadyController {
     @GetMapping("/form")
     public String addHrLadyForm(Model model) {
         model.addAttribute("hrLady",new HrLadyDto());
+        model.addAttribute("positions",positionService.getAllPositions());
         return "hrForm";
     }
 

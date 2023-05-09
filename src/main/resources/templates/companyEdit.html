@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
 </head>
 <body>
-<h1>Edytuj kampanię </h1>
-<a th:href="@{/campaigns/list}">Wróć do listy kampanii</a>
+<h1>Edytuj firmę </h1>
+<a th:href="@{/companies/list}">Wróć do listy firm</a>
 <br/>
-<h2 th:text="${accountError} ? 'Przekroczony budżet sprzedawcy' : ''" />
 
 <br/><br/>
-<form th:action="@{/campaigns/{id}(id=${campaign.id})}"
-      th:object="${campaign}" th:method="PUT">
+<form th:action="@{/companies/{id}(id=${company.id})}"
+      th:object="${company}" th:method="PUT">
   <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Usun problemy, sprobuj ponownie
@@ -21,10 +20,10 @@
     <tr>
       <td>ID</td>
       <td>:</td>
-      <td th:utext="${campaign.id}">ID</td>
+      <td th:utext="${company.id}">ID</td>
     </tr>
     <tr>
-      <td>Nazwa kampanii</td>
+      <td>Nazwa firmy</td>
       <td>:</td>
       <td>
         <input type="text" th:field="*{name}" />
@@ -34,80 +33,35 @@
       </td>
     </tr>
     <tr>
-      <td>Produkt</td>
+      <td>HR</td>
       <td>:</td>
       <td>
-        <select th:field="*{product}">
-          <option th:each="product : ${products}"
-                  th:value="${product.id}"
-                  th:text="${product}">PRODUKT
+<!--        <select th:field="*{product}">-->
+<!--          <option th:each="product : ${products}"-->
+<!--                  th:value="${product.id}"-->
+<!--                  th:text="${product}">PRODUKT-->
+<!--          </option>-->
+<!--        </select>-->
+        <input type="hidden" th:field="*{id}" />
+        <label for="hrs">HR (wybierz):</label>
+        <br />
+        <select id="hrs" th:field="*{hrs}" size="10" multiple="multiple">
+          <option th:each="hr : ${hrs}"
+                  th:value="${{hr}}"
+                  th:text="${hr.name}">
+            HrLady
           </option>
         </select>
+        <br />
+
         <span class="validationError"
               th:if="${#fields.hasErrors('product')}"
               th:errors="*{product}"></span>
       </td>
     </tr>
-    <tr>
-      <td>Opłata</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{bid}" />
-        <span class="validationError"
-              th:if="${#fields.hasErrors('bid')}"
-              th:errors="*{bid}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>Dostępne środki</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{fund}" />
-        <span class="validationError"
-              th:if="${#fields.hasErrors('fund')}"
-              th:errors="*{fund}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>Miasto</td>
-      <td>:</td>
-      <td>
-        <select th:field="*{city}">
-          <option th:each="city : ${cities}"
-                  th:value="${city.id}"
-                  th:text="${city}">MIASTO
-          </option>
-        </select>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('city')}"
-              th:errors="*{city}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>Promień</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{radius}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('radius')}"
-              th:errors="*{radius}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>Słowa kluczowe</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{keywords}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('keywords')}"
-              th:errors="*{keywords}"></span>
-      </td>
-
-    </tr>
   </table>
   <input type="submit" th:value="Aktualizuj" />
 </form>
-
 
 <br/>
 </body>

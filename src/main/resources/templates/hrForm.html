@@ -23,6 +23,18 @@
         th:errors="*{name}"></span>
   <br/>
 
+    <input type="hidden" th:field="*{id}" />
+    <label for="positions">Posady (wybierz):</label>
+    <br />
+    <select id="positions" th:field="*{positions}" size="10" multiple="multiple">
+        <option th:each="position : ${positions}"
+                th:value="${{position}}"
+                th:text="${position.name}">
+            Position
+        </option>
+    </select>
+    <br />
+
   <input type="submit" value="Utworz HR"/>
 </form>
 

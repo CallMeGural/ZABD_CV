@@ -23,6 +23,18 @@
         th:errors="*{name}"></span>
   <br/>
 
+    <input type="hidden" th:field="*{id}" />
+    <label for="hrs">HR (wybierz):</label>
+    <br />
+    <select id="hrs" th:field="*{hrs}" size="10" multiple="multiple">
+        <option th:each="hr : ${hrs}"
+                th:value="${{hr}}"
+                th:text="${hr.name}">
+            HrLady
+        </option>
+    </select>
+    <br />
+
   <input type="submit" value="Utworz firme"/>
 </form>
 

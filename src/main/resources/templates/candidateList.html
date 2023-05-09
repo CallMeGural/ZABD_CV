@@ -15,13 +15,15 @@
     <th>Imie</th>
     <th>Nazwisko</th>
     <th>Umiejetnosci</th>
+    <th>Znajomosc</th>
     <th>Edytuj</th>
     <th>Usuń</th>
   </tr>
   <tr th:each ="candidate : ${candidates}">
     <td th:text="${candidate.name}">NAME</td>
     <td th:text="${candidate.surname}">SURNAME</td>
-    <td th:text="${candidate.skills}">SKILLS</td>
+    <td th:text="${candidate.skills.value}">SKILL NAME</td>
+    <td th:text="${candidate.skills.key}">SKILL LEVEL</td>
     <td>
       <a th:href="@{/candidates/{id}(id=${candidate.id})}">
         <input type="submit" value="Edytuj"/>

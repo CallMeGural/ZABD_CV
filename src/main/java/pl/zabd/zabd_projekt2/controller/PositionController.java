@@ -21,7 +21,7 @@ public class PositionController {
 
     @GetMapping("/list")
     public String fetchAllHrs(Model model) {
-        model.addAttribute("hrs",positionService.getAllPositions());
+        model.addAttribute("positions",positionService.getAllPositions());
         return "positionList";
     }
 
