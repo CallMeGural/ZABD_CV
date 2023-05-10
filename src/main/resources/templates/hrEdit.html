@@ -32,25 +32,30 @@
               th:errors="*{name}"></span>
       </td>
     </tr>
-    <tr>
-      <td>Produkt</td>
+<!--    <tr>-->
+      <td>Posady</td>
       <td>:</td>
       <td>
-        <input type="hidden" th:field="*{id}" />
-        <label for="positions">Posady (wybierz):</label>
-        <br />
-        <select id="positions" th:field="*{positions}" size="10" multiple="multiple">
-          <option th:each="position : ${positions}"
-                  th:value="${{position}}"
-                  th:text="${position.name}">
-            Position
-          </option>
-        </select>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('product')}"
-              th:errors="*{product}"></span>
-      </td>
+<!--        <input type="hidden" th:field="*{id}" />-->
+<!--        <label for="positions">Posady (wybierz):</label>-->
+<!--        <br />-->
+<!--        <select id="positions" th:field="*{positions}" size="10" multiple="multiple">-->
+<!--          <option th:each="position : ${positions}"-->
+<!--                  th:value="${{position}}"-->
+<!--                  th:text="${position.name}">-->
+<!--            Position-->
+<!--          </option>-->
+<!--        </select>-->
+<!--        <span class="validationError"-->
+<!--              th:if="${#fields.hasErrors('product')}"-->
+<!--              th:errors="*{product}"></span>-->
+<!--      </td>-->
+<!--    </tr>-->
+    <tr th:each="position, itemStat : *{positions}">
+      <td><input th:field="*{positions[__${itemStat.index}__].name}" /></td>
+      <td><input th:field="*{positions[__${itemStat.index}__].salary}" /></td>
     </tr>
+      </td>
   </table>
   <input type="submit" th:value="Aktualizuj" />
 </form>
