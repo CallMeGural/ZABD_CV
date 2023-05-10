@@ -13,13 +13,13 @@
 <table>
   <tr>
     <th>Nazwa</th>
-    <th>Doswiadczenie</th>
+<!--    <th>Doswiadczenie</th>-->
     <th>Edytuj</th>
     <th>Usuń</th>
   </tr>
   <tr th:each ="skill : ${skills}">
     <td th:text="${skill.name}">NAME</td>
-    <td th:text="${skill.experience}">EXPERIENCE</td>
+<!--    <td th:text="${skill.experience}">EXPERIENCE</td>-->
     <td>
       <a th:href="@{/skills/{id}(id=${skill.id})}">
         <input type="submit" value="Edytuj"/>

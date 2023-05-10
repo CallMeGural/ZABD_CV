@@ -13,7 +13,7 @@ import pl.zabd.zabd_projekt2.service.SkillService;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/skill")
+@RequestMapping("/skills")
 public class SkillController {
 
     private final SkillService skillService;
@@ -31,8 +31,9 @@ public class SkillController {
     }
 
     @PostMapping
-    public Skill addSkill(SkillDto dto) {
-        return skillService.addSkill(dto);
+    public String addSkill(SkillDto dto) {
+        skillService.addSkill(dto);
+        return "redirect:/skills/list";
     }
 
     @PutMapping

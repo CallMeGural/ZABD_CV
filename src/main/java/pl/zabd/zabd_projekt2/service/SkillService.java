@@ -20,7 +20,6 @@ public class SkillService {
 
     public Skill addSkill(SkillDto dto) {
         Skill skill = new Skill();
-        skill.setExperience(dto.getExperience());
         skill.setName(dto.getName());
         return skillRepository.insert(skill);
     }
