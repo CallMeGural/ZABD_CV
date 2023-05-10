@@ -20,4 +20,9 @@ public class Position {
     private String name;
     private double salary;
     private List<Skill> skills;
+
+    @Override
+    public String toString() {
+        return name + " " + salary+"/msc";
+    }
 }

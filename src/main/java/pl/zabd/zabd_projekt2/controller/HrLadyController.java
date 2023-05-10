@@ -28,31 +28,32 @@ public class HrLadyController {
 
     @GetMapping("/form")
     public String addHrLadyForm(Model model) {
-        model.addAttribute("hrLady",new HrLadyDto());
+        model.addAttribute("hr",new HrLady());
         model.addAttribute("positions",positionService.getAllPositions());
         return "hrForm";
     }
 
     @PostMapping
-    public HrLady addHrLady(HrLadyDto dto) {
-        return hrService.addHrLady(dto);
+    public String addHrLady(HrLadyDto dto) {
+        hrService.addHrLady(dto);
+        return "redirect:/hrs/list";
     }
 
     @GetMapping("{id}")
-    public String getCompanyById(@PathVariable String id, Model model) {
-        model.addAttribute("hrLady",hrService.getHrById(id));
+    public String getHrById(@PathVariable String id, Model model) {
+        model.addAttribute("hr",hrService.getHrById(id));
         return "hrEdit";
     }
 
     @PutMapping
-    public String updateCompany(@Valid HrLady hrLady, Errors errors) {
+    public String updateHr(@Valid HrLady hrLady, Errors errors) {
         if(errors.hasErrors()) return "hrEdit";
         hrService.updateHr(hrLady);
         return "redirect:/hrs/list";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCompany(@PathVariable String id) {
+    public String deleteHr(@PathVariable String id) {
         hrService.deleteHr(id);
         return "redirect:/hrs/list";
     }

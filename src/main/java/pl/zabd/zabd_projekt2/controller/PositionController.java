@@ -13,7 +13,7 @@ import pl.zabd.zabd_projekt2.model.dto.PositionDto;
 import pl.zabd.zabd_projekt2.service.PositionService;
 
 @Controller
-@RequestMapping("/position")
+@RequestMapping("/positions")
 @RequiredArgsConstructor
 public class PositionController {
 
@@ -32,8 +32,9 @@ public class PositionController {
     }
 
     @PostMapping
-    public Position addHrLady(PositionDto dto) {
-        return positionService.addPosition(dto);
+    public String addHrLady(PositionDto dto) {
+         positionService.addPosition(dto);
+         return "redirect:/positions/list";
     }
 
 }

@@ -2,6 +2,7 @@ package pl.zabd.zabd_projekt2.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,6 +15,7 @@ import pl.zabd.zabd_projekt2.service.HrLadyService;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/companies")
+@Log
 public class CompanyController {
 
     private final CompanyService companyService;
@@ -22,6 +24,7 @@ public class CompanyController {
     @GetMapping("/list")
     public String fetchAllCompanies(Model model) {
         model.addAttribute("companies",companyService.getAllCompanies());
+        log.info(companyService.getAllCompanies().toString());
         return "companyList";
     }
 
@@ -44,7 +47,7 @@ public class CompanyController {
         return "companyEdit";
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public String updateCompany(@Valid Company company, Errors errors) {
         if(errors.hasErrors()) return "companyEdit";
         companyService.updateCompany(company);
