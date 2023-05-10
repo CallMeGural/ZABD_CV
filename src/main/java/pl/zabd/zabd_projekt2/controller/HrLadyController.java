@@ -39,13 +39,13 @@ public class HrLadyController {
         return "redirect:/hrs/list";
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String getHrById(@PathVariable String id, Model model) {
         model.addAttribute("hr",hrService.getHrById(id));
         return "hrEdit";
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public String updateHr(@Valid HrLady hrLady, Errors errors) {
         if(errors.hasErrors()) return "hrEdit";
         hrService.updateHr(hrLady);

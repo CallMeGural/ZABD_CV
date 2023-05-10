@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -19,7 +20,7 @@ public class Position {
     private String id;
     private String name;
     private double salary;
-    private List<Skill> skills;
+    private HashMap<Skill,IExperience> skills;
 
     @Override
     public String toString() {

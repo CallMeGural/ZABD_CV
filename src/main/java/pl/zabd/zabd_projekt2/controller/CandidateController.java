@@ -12,7 +12,6 @@ import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
 import pl.zabd.zabd_projekt2.service.CandidateService;
 import pl.zabd.zabd_projekt2.service.SkillService;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/candidates")
