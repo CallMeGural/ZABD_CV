@@ -14,16 +14,20 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+//@Document
 public class Position {
-    @Id
-    private String id;
+//    @Id
+//    private String id;
     private String name;
     private double salary;
-    private HashMap<Skill,IExperience> skills;
+//    private HashMap<Skill,IExperience> skills;
+    private List<Skill> skills;
 
     @Override
     public String toString() {
-        return name + " " + salary+"/msc";
+        return name + " "
+                + salary+"/msc"
+                + skills.stream()
+                .map(skill -> skill.toString()+"\n");
     }
 }

@@ -17,5 +17,6 @@ import java.util.List;
 public class PositionDto {
     private String name;
     private double salary;
-    private HashMap<Skill, IExperience> skills;
+//    private HashMap<Skill, IExperience> skills;
+    private List<Skill> skills;
 }

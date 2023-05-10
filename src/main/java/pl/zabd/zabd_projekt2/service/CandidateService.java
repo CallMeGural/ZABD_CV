@@ -1,9 +1,14 @@
 package pl.zabd.zabd_projekt2.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import pl.zabd.zabd_projekt2.model.Candidate;
+import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
+import pl.zabd.zabd_projekt2.model.dto.SkillDto;
 import pl.zabd.zabd_projekt2.repository.CandidateRepository;
 
 import java.util.List;
@@ -13,6 +18,7 @@ import java.util.List;
 public class CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final MongoTemplate mongoTemplate;
 
     public List<Candidate> getAllCandidates() {
         return candidateRepository.findAll();
@@ -41,5 +47,17 @@ public class CandidateService {
         update.setSurname(candidate.getSurname());
         candidateRepository.save(update);
 
+    }
+
+    public List<Candidate> getCandidatesByCriteria(List<Skill> skills) {
+//        return candidateRepository.findBySkillsInAndSkillLevelGreaterThanEqual(skills);
+        Criteria[] criteria = new Criteria[skills.size()];
+        for(int i=0;i<skills.size();i++) {
+            criteria[i] = Criteria.where("skills.name").is(skills.get(i).getName())
+                              .and("skills.experience").gte(skills.get(i).getExperience());
+        }
+        Criteria queryCriteria = new Criteria().andOperator(criteria);
+        Query query = Query.query(queryCriteria);
+        return mongoTemplate.find(query, Candidate.class);
     }
 }

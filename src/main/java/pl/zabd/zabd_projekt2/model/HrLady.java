@@ -13,10 +13,17 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+//@Document
 public class HrLady {
-    @Id
-    private String id;
+//    @Id
+//    private String id;
     private String name;
     private List<Position> positions;
+
+    @Override
+    public String toString() {
+        return name
+                + positions.stream()
+                .map(position -> position.toString()+"\n");
+    }
 }

@@ -8,9 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.zabd.zabd_projekt2.model.Candidate;
+import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
+import pl.zabd.zabd_projekt2.model.dto.SkillDto;
 import pl.zabd.zabd_projekt2.service.CandidateService;
 import pl.zabd.zabd_projekt2.service.SkillService;
+
+import java.util.List;
 
 
 @Controller
@@ -57,5 +61,11 @@ public class CandidateController {
     public String deleteCandidate(@PathVariable String id) {
         candidateService.deleteCandidate(id);
         return "redirect:/candidates/list";
+    }
+
+    @GetMapping
+    public String fetchCandidatesBySkills(@RequestBody List<Skill> dtos, Model model) {
+        model.addAttribute("candidates",candidateService.getCandidatesByCriteria(dtos));
+        return "candidateList";
     }
 }
