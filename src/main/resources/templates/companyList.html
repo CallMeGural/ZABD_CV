@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Lista firm</title>
+    <meta charset="UTF-8">
+    <title>Lista firm</title>
 </head>
 
 <body>
@@ -11,26 +11,26 @@
 <h1>Lista firm</h1>
 
 <table>
-  <tr>
-    <th>Nazwa</th>
-    <th>HR</th>
-    <th>Edytuj</th>
-    <th>Usuń</th>
-  </tr>
-  <tr th:each ="company : ${companies}">
-    <td th:text="${company.name}">NAME</td>
-    <td th:text="${company.hrs}">HRS</td>
-    <td>
-      <a th:href="@{/companies/{id}(id=${company.id})}">
-        <input type="submit" value="Edytuj"/>
-      </a>
-    </td>
-    <td>
-      <form th:action="@{/companies/{id}(id=${company.id})}" th:method="DELETE">
-        <input type = "submit" value="Usuń"/>
-      </form>
-    </td>
-  </tr>
+    <tr>
+        <th>Nazwa</th>
+        <th>HR</th>
+        <th>Edytuj</th>
+        <th>Usuń</th>
+    </tr>
+    <tr th:each="company : ${companies}">
+        <td th:text="${company.name}">NAME</td>
+        <td th:text="${company.hrs}">HRS</td>
+        <td>
+            <a th:href="@{/companies/{id}(id=${company.id})}">
+                <input type="submit" value="Edytuj"/>
+            </a>
+        </td>
+        <td>
+            <form th:action="@{/companies/{id}(id=${company.id})}" th:method="DELETE">
+                <input type="submit" value="Usuń"/>
+            </form>
+        </td>
+    </tr>
 </table>
 
 
