@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
 </head>
 <body>
 <h1>Edytuj firmę </h1>
@@ -11,62 +11,46 @@
 <br/><br/>
 <form th:action="@{/companies/{id}(id=${company.id})}"
       th:object="${company}" th:method="PUT">
-  <div th:if="${#fields.hasErrors()}">
+    <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Usun problemy, sprobuj ponownie
             </span>
-  </div>
-  <table>
-    <tr>
-      <td>ID</td>
-      <td>:</td>
-      <td th:utext="${company.id}">ID</td>
-    </tr>
-    <tr>
-      <td>Nazwa firmy</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{name}" />
-        <span class="validationError"
-              th:if="${#fields.hasErrors('name')}"
-              th:errors="*{name}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>HR</td>
-      <td>:</td>
-      <td>
-<!--        <select th:field="*{product}">-->
-<!--          <option th:each="product : ${products}"-->
-<!--                  th:value="${product.id}"-->
-<!--                  th:text="${product}">PRODUKT-->
-<!--          </option>-->
-<!--        </select>-->
-        <input type="hidden" th:field="*{id}" />
-        <label for="hrs">HR (wybierz):</label>
-        <br />
-        <select id="hrs" th:field="*{hrs}" size="10" multiple="multiple">
-          <option th:each="hr : ${hrs}"
-                  th:value="${{hr}}"
-                  th:text="${hr.name}">
-            HrLady
-          </option>
-        </select>
-        <br />
-
-<<<<<<< HEAD
-        <span class="validationError"
-              th:if="${#fields.hasErrors('hr')}"
-              th:errors="*{hr}"></span>
-=======
-<!--        <span class="validationError"-->
-<!--              th:if="${#fields.hasErrors('hr')}"-->
-<!--              th:errors="*{hrLady}"></span>-->
->>>>>>> 41cb360e6e54144c56f856f98c14c96073f9d9af
-      </td>
-    </tr>
-  </table>
-  <input type="submit" th:value="Aktualizuj" />
+    </div>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>:</td>
+            <td th:utext="${company.id}">ID</td>
+        </tr>
+        <tr>
+            <td>Nazwa firmy</td>
+            <td>:</td>
+            <td>
+                <input type="text" th:field="*{name}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>HR</td>
+            <td>:</td>
+            <td>
+                <input type="hidden" th:field="*{id}"/>
+                <label for="hrs">HR (wybierz):</label>
+                <br/>
+                <select id="hrs" th:field="*{hrs}" size="10" multiple="multiple">
+                    <option th:each="hr : ${hrs}"
+                            th:value="${{hr}}"
+                            th:text="${hr.name}">
+                        HrLady
+                    </option>
+                </select>
+                <br/>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" th:value="Aktualizuj"/>
 </form>
 
 <br/>

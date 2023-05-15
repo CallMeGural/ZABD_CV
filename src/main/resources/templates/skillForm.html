@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Nowa umiejetnosc</title>
+    <meta charset="UTF-8">
+    <title>Nowa umiejetnosc</title>
 </head>
 <body>
 
@@ -10,20 +10,27 @@
 
 <form method="POST" th:action="@{/skills}" th:object="${skill}">
 
-  <div th:if="${#fields.hasErrors()}">
+    <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Wystapily bledy. Sprobuj ponownie.
             </span>
-  </div>
+    </div>
 
-  <label for="name">Nazwa: </label>
-  <input type="text" th:field="*{name}"/>
-  <span class="validationError"
-        th:if="${#fields.hasErrors('name')}"
-        th:errors="*{name}"></span>
-  <br/>
+    <label for="name">Nazwa: </label>
+    <input type="text" th:field="*{name}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span>
+    <br/>
 
-  <input type="submit" value="Utworz umiejetnosc"/>
+    <label for="experience">Doswiadczenie: </label>
+    <select name="experience">
+        <option th:each="expOpt : ${T(pl.zabd.zabd_projekt2.model.IExperience.values()}"
+                th:value="${expOpt}" th:text="${expOpt}"></option>
+    </select>
+    <br/>
+
+    <input type="submit" value="Utworz umiejetnosc"/>
 </form>
 
 <a th:href="@{/}"><input type="submit" value="Menu"/></a>

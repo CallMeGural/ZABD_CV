@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Nowy kandydat</title>
+    <meta charset="UTF-8">
+    <title>Nowy kandydat</title>
 </head>
 <body>
 
@@ -10,28 +10,59 @@
 
 <form method="POST" th:action="@{/candidates}" th:object="${candidate}">
 
-  <div th:if="${#fields.hasErrors()}">
+    <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Wystapily bledy. Sprobuj ponownie.
             </span>
-  </div>
+    </div>
 
-  <label for="name">Imie: </label>
-  <input type="text" th:field="*{name}"/>
-  <span class="validationError"
-        th:if="${#fields.hasErrors('name')}"
-        th:errors="*{name}"></span>
-  <br/>
+    <label for="name">Imie: </label>
+    <input type="text" th:field="*{name}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span>
+    <br/>
 
-  <label for="surname">Nazwisko: </label>
-  <input  type="text" th:field="*{surname}"/>
-  <span class="validationError"
-        th:if="${#fields.hasErrors('surname')}"
-        th:errors="*{surname}"></span>
-  <br/>
+    <label for="surname">Nazwisko: </label>
+    <input type="text" th:field="*{surname}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('surname')}"
+          th:errors="*{surname}"></span>
+    <br/>
 
+    <label for="skills.name">Umiejetnosc: </label>
+    <input type="text" th:field="*{skills.name}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('skills.name')}"
+          th:errors="*{skills.name}"></span>
+    <br/>
 
-  <input type="submit" value="Utworz kandydata"/>
+    <label for="skills.experience">Doswiadczenie: </label>
+    <select name="skills.experience">
+        <option th:each="expOpt : ${T(pl.zabd.zabd_projekt2.model.IExperience.values()}"
+                th:value="${expOpt}" th:text="${expOpt}"></option>
+    </select>
+    <br/>
+    <!--
+      TODO: wypelnienie listy
+    -->
+    <input class="addskill" type="submit" value="Dodaj umiejetnosc" th:formaction="'/save-post/'+${post.id}">
+
+    <table class="table table-striped table-bordered ">
+        <tr>
+            <th>Umiejetnosc</th>
+            <th>Doswiadczenie</th>
+        </tr>
+        <tr th:if="${#lists.isEmpty(skills)}">
+            <td class="text-center" colspan="7">Pusta lista umiejetnosci.</td>
+        </tr>
+        <tr th:each="skill : ${skills}">
+            <td class="align-middle" th:text="${skill.name}"></td>
+            <td class="align-middle" th:text="${skill.experience}"></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Utworz kandydata"/>
 </form>
 
 <a th:href="@{/}"><input type="submit" value="Menu"/></a>

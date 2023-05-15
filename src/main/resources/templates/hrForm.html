@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Nowy HR</title>
+    <meta charset="UTF-8">
+    <title>Nowy HR</title>
 </head>
 <body>
 
@@ -10,22 +10,22 @@
 
 <form method="POST" th:action="@{/hrs}" th:object="${hr}">
 
-  <div th:if="${#fields.hasErrors()}">
+    <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Wystapily bledy. Sprobuj ponownie.
             </span>
-  </div>
+    </div>
 
-  <label for="name">Imie: </label>
-  <input type="text" th:field="*{name}"/>
-  <span class="validationError"
-        th:if="${#fields.hasErrors('name')}"
-        th:errors="*{name}"></span>
-  <br/>
+    <label for="name">Imie: </label>
+    <input type="text" th:field="*{name}"/>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span>
+    <br/>
 
-    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{id}"/>
     <label for="positions">Posady (wybierz):</label>
-    <br />
+    <br/>
     <select id="positions" th:field="*{positions}" size="10" multiple="multiple">
         <option th:each="position : ${positions}"
                 th:value="${{position}}"
@@ -33,9 +33,9 @@
             Position
         </option>
     </select>
-    <br />
+    <br/>
 
-  <input type="submit" value="Utworz HR"/>
+    <input type="submit" value="Utworz HR"/>
 </form>
 
 <a th:href="@{/}"><input type="submit" value="Menu"/></a>
