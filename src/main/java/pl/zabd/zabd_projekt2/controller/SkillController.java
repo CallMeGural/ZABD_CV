@@ -33,8 +33,7 @@ public class SkillController {
     @PostMapping
     public String addSkill(SkillDto dto) {
         skillService.addSkill(dto);
-        return "redirect:/skills/list";
-    }
+        return "redirect:/skills/list";    }
 
     @PutMapping
     public Skill updateSkill(Skill skill) {

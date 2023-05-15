@@ -13,6 +13,5 @@ import java.util.List;
 public class CandidateDto {
     private String name;
     private String surname;
-//    private HashMap<Skill, IExperience> skills;
     private List<Skill> skills;
 }

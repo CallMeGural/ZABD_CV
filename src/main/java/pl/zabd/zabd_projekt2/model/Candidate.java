@@ -20,7 +20,6 @@ public class Candidate {
     private String id;
     private String name;
     private String surname;
-//    private HashMap<Skill,IExperience> skills;
     private List<Skill> skills;
 
     public Candidate(String name, String surname, List<Skill> skills) {

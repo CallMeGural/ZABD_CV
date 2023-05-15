@@ -32,10 +32,10 @@ public class PositionService {
     }
 
     public void updatePosition(Position position) {
-        Position update = getPositionById(position.getId());
-        update.setSalary(position.getSalary());
-        update.setName(position.getName());
-        update.setSkills(position.getSkills());
+//        Position update = getPositionById(position.getId());
+//        update.setSalary(position.getSalary());
+//        update.setName(position.getName());
+//        update.setSkills(position.getSkills());
     }
 
     public void deletePosition(String id) {

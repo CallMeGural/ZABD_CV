@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.zabd.zabd_projekt2.model.Candidate;
+import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
 import pl.zabd.zabd_projekt2.model.dto.SkillDto;
@@ -34,7 +35,7 @@ public class CandidateController {
     @GetMapping("/form")
     public String addCandidateForm(Model model) {
         model.addAttribute("candidate",new CandidateDto());
-        model.addAttribute("skills",skillService.getAllSkills());
+        model.addAttribute("skills", IExperience.values());//skillService.getAllSkills());
         return "candidateForm";
     }
 

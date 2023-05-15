@@ -21,7 +21,7 @@ public class PositionController {
     private final PositionService positionService;
 
     @GetMapping("/list")
-    public String fetchAllHrs(Model model) {
+    public String fetchPositions(Model model) {
         model.addAttribute("positions",positionService.getAllPositions());
         return "positionList";
     }
@@ -33,7 +33,7 @@ public class PositionController {
     }
 
     @PostMapping
-    public String addHrLady(PositionDto dto) {
+    public String addPosition(PositionDto dto) {
          positionService.addPosition(dto);
          return "redirect:/positions/list";
     }
@@ -45,7 +45,7 @@ public class PositionController {
     }
 
     @PutMapping("/{id}")
-    public String updateCompany(@Valid Position position, Errors errors) {
+    public String updatePosition(@Valid Position position, Errors errors) {
         if(errors.hasErrors()) return "companyEdit";
         positionService.updatePosition(position);
         return "redirect:/positions/list";
