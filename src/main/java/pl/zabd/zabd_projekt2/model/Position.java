@@ -7,22 +7,27 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+//@Document
 public class Position {
-    @Id
-    private String id;
+//    @Id
+//    private String id;
     private String name;
     private double salary;
+//    private HashMap<Skill,IExperience> skills;
     private List<Skill> skills;
 
     @Override
     public String toString() {
-        return name + " " + salary+"/msc";
+        return name + " "
+                + salary+"/msc"
+                + skills.stream()
+                .map(skill -> skill.toString()+"\n");
     }
 }

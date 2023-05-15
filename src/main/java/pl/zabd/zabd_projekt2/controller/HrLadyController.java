@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.HrLady;
 import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
 import pl.zabd.zabd_projekt2.service.HrLadyService;
@@ -39,13 +38,13 @@ public class HrLadyController {
         return "redirect:/hrs/list";
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String getHrById(@PathVariable String id, Model model) {
         model.addAttribute("hr",hrService.getHrById(id));
         return "hrEdit";
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public String updateHr(@Valid HrLady hrLady, Errors errors) {
         if(errors.hasErrors()) return "hrEdit";
         hrService.updateHr(hrLady);

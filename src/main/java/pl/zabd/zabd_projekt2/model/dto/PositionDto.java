@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -15,5 +17,6 @@ import java.util.List;
 public class PositionDto {
     private String name;
     private double salary;
+//    private HashMap<Skill, IExperience> skills;
     private List<Skill> skills;
 }

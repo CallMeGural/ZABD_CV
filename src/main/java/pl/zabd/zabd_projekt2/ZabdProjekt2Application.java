@@ -24,7 +24,7 @@ public class ZabdProjekt2Application {
     @Bean
     CommandLineRunner runner(CandidateRepository repository) {
         return args -> {
-            repository.insert(new Candidate("Jan","Nowak",new HashMap<>()));
+            repository.insert(new Candidate("Jan", "Nowak", List.of()));
         };
     }
 }

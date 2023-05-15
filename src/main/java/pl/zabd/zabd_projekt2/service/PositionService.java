@@ -19,11 +19,26 @@ public class PositionService {
         return positionRepository.findAll();
     }
 
-    public Position addPosition(PositionDto dto) {
+    public void addPosition(PositionDto dto) {
         Position position = new Position();
         position.setName(dto.getName());
         position.setSalary(dto.getSalary());
         position.setSkills(dto.getSkills());
-        return positionRepository.insert(position);
+        positionRepository.insert(position);
+    }
+
+    public Position getPositionById(String id) {
+        return positionRepository.findById(id).orElseThrow();
+    }
+
+    public void updatePosition(Position position) {
+        Position update = getPositionById(position.getId());
+        update.setSalary(position.getSalary());
+        update.setName(position.getName());
+        update.setSkills(position.getSkills());
+    }
+
+    public void deletePosition(String id) {
+        positionRepository.deleteById(id);
     }
 }

@@ -10,9 +10,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @NoArgsConstructor
-@Document
+//@Document
 public class Skill {
-    @Id
-    private String id;
+//    @Id
+//    private String id;
     private String name;
+    private IExperience experience;
+
+    @Override
+    public String toString() {
+        return  name + " : " +experience.toString();
+    }
 }

@@ -19,4 +19,11 @@ public class Company {
     private String id;
     private String name;
     private List<HrLady> hrs;
+
+    @Override
+    public String toString() {
+        return name
+                + hrs.stream()
+                .map(hr -> hr.toString()+"\n");
+    }
 }

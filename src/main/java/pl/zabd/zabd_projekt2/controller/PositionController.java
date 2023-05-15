@@ -1,11 +1,12 @@
 package pl.zabd.zabd_projekt2.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.HrLady;
 import pl.zabd.zabd_projekt2.model.Position;
 import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
@@ -26,7 +27,7 @@ public class PositionController {
     }
 
     @GetMapping("/form")
-    public String addHrLadyForm(Model model) {
+    public String addPositionForm(Model model) {
         model.addAttribute("position",new PositionDto());
         return "positionForm";
     }
@@ -35,6 +36,25 @@ public class PositionController {
     public String addHrLady(PositionDto dto) {
          positionService.addPosition(dto);
          return "redirect:/positions/list";
+    }
+
+    @GetMapping("/{id}")
+    public String getPositionById(@PathVariable String id, Model model) {
+        model.addAttribute("position",positionService.getPositionById(id));
+        return "positionEdit";
+    }
+
+    @PutMapping("/{id}")
+    public String updateCompany(@Valid Position position, Errors errors) {
+        if(errors.hasErrors()) return "companyEdit";
+        positionService.updatePosition(position);
+        return "redirect:/positions/list";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePosition(@PathVariable String id) {
+        positionService.deletePosition(id);
+        return "redirect:/positions/list";
     }
 
 }
