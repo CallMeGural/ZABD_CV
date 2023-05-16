@@ -24,7 +24,6 @@ import java.util.List;
 public class CandidateController {
 
     private final CandidateService candidateService;
-    private final SkillService skillService;
 
     @GetMapping("/list")
     public String fetchAllCandidates(Model model) {
@@ -35,7 +34,7 @@ public class CandidateController {
     @GetMapping("/form")
     public String addCandidateForm(Model model) {
         model.addAttribute("candidate",new CandidateDto());
-        model.addAttribute("skills", IExperience.values());//skillService.getAllSkills());
+        model.addAttribute("skills", IExperience.values());
         return "candidateForm";
     }
 
@@ -64,6 +63,12 @@ public class CandidateController {
         return "redirect:/candidates/list";
     }
 
+    @GetMapping("/filter")
+    public String passCanditatesToFilter(Model model) {
+        model.addAttribute("candidates",candidateService.getAllCandidates());
+        model.addAttribute("skills", IExperience.values());
+        return "candidateFilter";
+    }
     @GetMapping
     public String fetchCandidatesBySkills(@RequestBody List<Skill> dtos, Model model) {
         model.addAttribute("candidates",candidateService.getCandidatesByCriteria(dtos));

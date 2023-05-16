@@ -18,7 +18,7 @@ import pl.zabd.zabd_projekt2.service.CompanyService;
 public class CompanyController {
 
     private final CompanyService companyService;
-    private final HrLadyService hrService;
+    //private final HrLadyService hrService;
 
     @GetMapping("/list")
     public String fetchAllCompanies(Model model) {
@@ -30,7 +30,7 @@ public class CompanyController {
     @GetMapping("/form")
     public String addCompanyForm(Model model) {
         model.addAttribute("company",new CompanyDto());
-        model.addAttribute("hrs", hrService.getAllHrs());
+        //model.addAttribute("hrs", hrService.getAllHrs());
         return "companyForm";
     }
 
