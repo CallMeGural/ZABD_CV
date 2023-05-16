@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<h1>Filtered Candidates List</h1>
+<a th:href="@{/candidates/list}">Back to Candidates List</a>
+<br/>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <!-- Add other relevant columns -->
+    </tr>
+    <tr th:each="candidate : ${candidates}">
+        <td th:text="${candidate.name}"></td>
+        <td th:text="${candidate.surname}"></td>
+        <!-- Add other relevant columns -->
+    </tr>
+</table>
+</body>
+</html>

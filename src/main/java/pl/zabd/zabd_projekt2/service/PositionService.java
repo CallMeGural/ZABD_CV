@@ -24,6 +24,9 @@ public class PositionService {
         position.setName(dto.getName());
         position.setSalary(dto.getSalary());
         position.setSkills(dto.getSkills());
+        position.setCompanyName(dto.getCompanyName());
+        position.setHrPhoneNumber(dto.getHrPhoneNumber());
+        position.setHrName(dto.getHrName());
         positionRepository.insert(position);
     }
 
@@ -32,10 +35,14 @@ public class PositionService {
     }
 
     public void updatePosition(Position position) {
-//        Position update = getPositionById(position.getId());
-//        update.setSalary(position.getSalary());
-//        update.setName(position.getName());
-//        update.setSkills(position.getSkills());
+        Position update = getPositionById(position.getId());
+        update.setName(position.getName());
+        update.setSalary(position.getSalary());
+        update.setSkills(position.getSkills());
+        update.setCompanyName(position.getCompanyName());
+        update.setHrPhoneNumber(position.getHrPhoneNumber());
+        update.setHrName(position.getHrName());
+        positionRepository.save(update);
     }
 
     public void deletePosition(String id) {

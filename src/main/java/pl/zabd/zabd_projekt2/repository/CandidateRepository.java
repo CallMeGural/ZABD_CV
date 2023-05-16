@@ -8,6 +8,7 @@ import pl.zabd.zabd_projekt2.model.Skill;
 import java.util.List;
 
 public interface CandidateRepository extends MongoRepository<Candidate,String> {
+    List<Candidate> findBySkillsIn(List<String> skillNames);
 //    List<Candidate> findAllBySkillsIn(List<Skill> skills);
 
 }

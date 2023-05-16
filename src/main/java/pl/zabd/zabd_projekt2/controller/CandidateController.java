@@ -3,6 +3,7 @@ package pl.zabd.zabd_projekt2.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,12 +16,15 @@ import pl.zabd.zabd_projekt2.model.dto.SkillDto;
 import pl.zabd.zabd_projekt2.service.CandidateService;
 import pl.zabd.zabd_projekt2.service.SkillService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 @Controller
 @RequestMapping("/candidates")
 @RequiredArgsConstructor
+@Log
 public class CandidateController {
 
     private final CandidateService candidateService;
@@ -64,14 +68,26 @@ public class CandidateController {
     }
 
     @GetMapping("/filter")
-    public String passCanditatesToFilter(Model model) {
-        model.addAttribute("candidates",candidateService.getAllCandidates());
-        model.addAttribute("skills", IExperience.values());
-        return "candidateFilter";
+    public String passCandidatesToFilter(Model model) {
+        model.addAttribute("skills",new ArrayList<Skill>());
+        model.addAttribute("expValues", IExperience.values());
+        return "candidateFilterMainPage";
     }
-    @GetMapping
-    public String fetchCandidatesBySkills(@RequestBody List<Skill> dtos, Model model) {
-        model.addAttribute("candidates",candidateService.getCandidatesByCriteria(dtos));
+//    @GetMapping
+//    public String fetchCandidatesBySkills(@ModelAttribute("skills") ArrayList<Skill> dtos, Model model) {
+//        log.info(dtos.toString());
+//        model.addAttribute("candidates",candidateService.getCandidatesByCriteria(dtos));
+//        return "kandydaci";
+//    }
+    @PostMapping("/candidates")
+    public String fetchCandidatesBySkills(@RequestParam("skills") String skills, Model model) {
+//        List<Candidate> filteredCandidates = candidateService.getCandidatesBySkills(skills);
+//        model.addAttribute("candidates", filteredCandidates);
+//        return "candidateList";
+        List<String> skillList = Arrays.asList(skills.split(","));
+        List<Candidate> filteredCandidates = candidateService.getCandidatesBySkills(skillList);
+        model.addAttribute("candidates", filteredCandidates);
         return "candidateList";
     }
+
 }

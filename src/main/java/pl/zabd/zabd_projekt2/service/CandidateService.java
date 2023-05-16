@@ -11,7 +11,9 @@ import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
 import pl.zabd.zabd_projekt2.model.dto.SkillDto;
 import pl.zabd.zabd_projekt2.repository.CandidateRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -59,5 +61,28 @@ public class CandidateService {
         Criteria queryCriteria = new Criteria().andOperator(criteria);
         Query query = Query.query(queryCriteria);
         return mongoTemplate.find(query, Candidate.class);
+    }
+//        List<String> skillNames = skills.stream()
+//                .map(Skill::getName)
+//                .collect(Collectors.toList());
+//
+//        return candidateRepository.findBySkillsIn(skillNames);
+//    }
+
+    public List<Candidate> getCandidatesBySkills(List<String> skills) {
+        List<Candidate> allCandidates = candidateRepository.findAll();
+        List<Candidate> filteredCandidates = new ArrayList<>();
+
+        for (Candidate candidate : allCandidates) {
+            List<String> candidateSkills = candidate.getSkills().stream()
+                    .map(Skill::getName)
+                    .collect(Collectors.toList());
+
+            if (candidateSkills.containsAll(skills)) {
+                filteredCandidates.add(candidate);
+            }
+        }
+
+        return filteredCandidates;
     }
 }
