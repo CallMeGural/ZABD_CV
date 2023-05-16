@@ -1,17 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
 </head>
 <body>
-<h1>Edytuj kampanię </h1>
-<a th:href="@{/campaigns/list}">Wróć do listy kampanii</a>
+<h1>Edytuj posade</h1>
+<a th:href="@{/positions/list}">Wróć do listy posad</a>
 <br/>
-<h2 th:text="${accountError} ? 'Przekroczony budżet sprzedawcy' : ''" />
 
 <br/><br/>
-<form th:action="@{/campaigns/{id}(id=${campaign.id})}"
-      th:object="${campaign}" th:method="PUT">
+<form th:action="@{/positions/{id}(id=${position.id})}"
+      th:object="${position}" th:method="PUT">
   <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Usun problemy, sprobuj ponownie
@@ -21,93 +20,71 @@
     <tr>
       <td>ID</td>
       <td>:</td>
-      <td th:utext="${campaign.id}">ID</td>
+      <td th:utext="${position.id}">ID</td>
     </tr>
     <tr>
-      <td>Nazwa kampanii</td>
+      <td>Nazwa</td>
       <td>:</td>
       <td>
-        <input type="text" th:field="*{name}" />
+        <input type="text" th:field="*{name}"/>
         <span class="validationError"
               th:if="${#fields.hasErrors('name')}"
               th:errors="*{name}"></span>
       </td>
     </tr>
     <tr>
-      <td>Produkt</td>
+      <td>Wyplata</td>
       <td>:</td>
       <td>
-        <select th:field="*{product}">
-          <option th:each="product : ${products}"
-                  th:value="${product.id}"
-                  th:text="${product}">PRODUKT
-          </option>
-        </select>
+        <input type="text" th:field="*{salary}"/>
         <span class="validationError"
-              th:if="${#fields.hasErrors('product')}"
-              th:errors="*{product}"></span>
+              th:if="${#fields.hasErrors('salary')}"
+              th:errors="*{salary}"></span>
       </td>
     </tr>
     <tr>
-      <td>Opłata</td>
+      <td>Firma</td>
       <td>:</td>
       <td>
-        <input type="text" th:field="*{bid}" />
+        <input type="text" th:field="*{companyName}"/>
         <span class="validationError"
-              th:if="${#fields.hasErrors('bid')}"
-              th:errors="*{bid}"></span>
+              th:if="${#fields.hasErrors('companyName')}"
+              th:errors="*{companyName}"></span>
       </td>
     </tr>
     <tr>
-      <td>Dostępne środki</td>
+      <td>HR-owiec</td>
       <td>:</td>
       <td>
-        <input type="text" th:field="*{fund}" />
+        <input type="text" th:field="*{hrName}"/>
         <span class="validationError"
-              th:if="${#fields.hasErrors('fund')}"
-              th:errors="*{fund}"></span>
+              th:if="${#fields.hasErrors('hrName')}"
+              th:errors="*{hrName}"></span>
       </td>
     </tr>
     <tr>
-      <td>Miasto</td>
+      <td>Nr telefonu do HR</td>
       <td>:</td>
       <td>
-        <select th:field="*{city}">
-          <option th:each="city : ${cities}"
-                  th:value="${city.id}"
-                  th:text="${city}">MIASTO
-          </option>
-        </select>
+        <input type="text" th:field="*{hrPhoneNumber}"/>
         <span class="validationError"
-              th:if="${#fields.hasErrors('city')}"
-              th:errors="*{city}"></span>
+              th:if="${#fields.hasErrors('hrPhoneNumber')}"
+              th:errors="*{hrPhoneNumber}"></span>
       </td>
     </tr>
     <tr>
-      <td>Promień</td>
+      <td>Umiejętności</td>
       <td>:</td>
       <td>
-        <input type="text" th:field="*{radius}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('radius')}"
-              th:errors="*{radius}"></span>
-      </td>
+    <tr th:each="skill, itemStat : *{skills}">
+      <td><input th:field="*{skills[__${itemStat.index}__].name}"/></td>
+      <td><input th:field="*{skills[__${itemStat.index}__].experience}"/></td>
     </tr>
-    <tr>
-      <td>Słowa kluczowe</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{keywords}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('keywords')}"
-              th:errors="*{keywords}"></span>
-      </td>
-
+    </td>
     </tr>
   </table>
-  <input type="submit" th:value="Aktualizuj" />
+  <input type="submit" value="Aktualizuj"/>
 </form>
-
 
 <br/>
 </body>
