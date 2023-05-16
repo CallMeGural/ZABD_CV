@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.dto.CompanyDto;
 import pl.zabd.zabd_projekt2.service.CompanyService;
-import pl.zabd.zabd_projekt2.service.HrLadyService;
 
 @Controller
 @RequiredArgsConstructor

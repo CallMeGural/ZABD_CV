@@ -16,7 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 public class PositionDto {
     private String name;
+    private String hrName;
+    private String hrPhoneNumber;
+    private String companyName;
     private double salary;
-//    private HashMap<Skill, IExperience> skills;
     private List<Skill> skills;
 }

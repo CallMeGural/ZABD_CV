@@ -25,7 +25,7 @@ public class SkillService {
     }
 
     public Skill updateSkill(Skill skill) {
-        Skill update = skillRepository.findById(skill.getId()).orElseThrow();
+//        Skill update = skillRepository.findById(skill.getId()).orElseThrow();
         //TODO: check how to update
         return null;
     }

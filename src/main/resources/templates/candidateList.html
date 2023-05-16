@@ -1,45 +1,82 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Lista kandydatow</title>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<h1>Lista kandydatow</h1>-->
+
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Imie</th>-->
+<!--        <th>Nazwisko</th>-->
+<!--        <th>Umiejetnosci</th>-->
+<!--        <th>Znajomosc</th>-->
+<!--        <th>Edytuj</th>-->
+<!--        <th>Usuń</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="candidate : ${candidates}">-->
+<!--        <td th:text="${candidate.name}">NAME</td>-->
+<!--        <td th:text="${candidate.surname}">SURNAME</td>-->
+<!--        <td th:text="${candidate.skills.name}">SKILL NAME</td>-->
+<!--        <td th:text="${candidate.skills.experience}">SKILL LEVEL</td>-->
+<!--        <td>-->
+<!--            <a th:href="@{/candidates/{id}(id=${candidate.id})}">-->
+<!--                <input type="submit" value="Edytuj"/>-->
+<!--            </a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <form th:action="@{/candidates/{id}(id=${candidate.id})}" th:method="DELETE">-->
+<!--                <input type="submit" value="Usuń"/>-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+
+
+<!--</body>-->
+
+<!--</html>-->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista kandydatow</title>
+    <title>Lista kandydatów</title>
 </head>
-
 <body>
-
-<h1>Lista kandydatow</h1>
+<h1>Lista kandydatów</h1>
 
 <table>
+    <thead>
     <tr>
-        <th>Imie</th>
+        <th>Imię</th>
         <th>Nazwisko</th>
-        <th>Umiejetnosci</th>
-        <th>Znajomosc</th>
-        <th>Edytuj</th>
-        <th>Usuń</th>
+        <th>Umiejętności</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="candidate : ${candidates}">
-        <td th:text="${candidate.name}">NAME</td>
-        <td th:text="${candidate.surname}">SURNAME</td>
-        <td th:text="${candidate.skills.name}">SKILL NAME</td>
-        <td th:text="${candidate.skills.experience}">SKILL LEVEL</td>
+        <td th:text="${candidate.name}"></td>
+        <td th:text="${candidate.surname}"></td>
         <td>
-            <a th:href="@{/candidates/{id}(id=${candidate.id})}">
-                <input type="submit" value="Edytuj"/>
-            </a>
-        </td>
-        <td>
-            <form th:action="@{/candidates/{id}(id=${candidate.id})}" th:method="DELETE">
-                <input type="submit" value="Usuń"/>
-            </form>
+            <ul>
+                <li th:each="skill : ${candidate.skills}">
+                    <span th:text="${skill.name}"></span>
+                    <span>(</span>
+                    <span th:text="${skill.experience}"></span>
+                    <span>)</span>
+                </li>
+            </ul>
         </td>
     </tr>
+    </tbody>
 </table>
-
-
 <a th:href="@{/}"><input type="submit" value="Menu"/></a>
 <a th:href="@{/candidates/form}"><input type="submit" value="Utwórz kandydata"/></a>
 </body>
-
 </html>

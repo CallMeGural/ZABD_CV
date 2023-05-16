@@ -21,10 +21,10 @@ public class ZabdProjekt2Application {
         SpringApplication.run(ZabdProjekt2Application.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner(CandidateRepository repository) {
-        return args -> {
-            repository.insert(new Candidate("Jan", "Nowak", List.of()));
-        };
-    }
+//    @Bean
+//    CommandLineRunner runner(CandidateRepository repository) {
+//        return args -> {
+//            repository.insert(new Candidate("Jan", "Nowak", List.of()));
+//        };
+//    }
 }
