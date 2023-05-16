@@ -32,10 +32,14 @@ public class PositionService {
     }
 
     public void updatePosition(Position position) {
-//        Position update = getPositionById(position.getId());
-//        update.setSalary(position.getSalary());
-//        update.setName(position.getName());
-//        update.setSkills(position.getSkills());
+        Position update = getPositionById(position.getId());
+        update.setSalary(position.getSalary());
+        update.setName(position.getName());
+        update.setSkills(position.getSkills());
+        update.setHrName(position.getHrName());
+        update.setCompanyName(position.getCompanyName());
+        update.setHrPhoneNumber(position.getHrPhoneNumber());
+        positionRepository.save(update);
     }
 
     public void deletePosition(String id) {

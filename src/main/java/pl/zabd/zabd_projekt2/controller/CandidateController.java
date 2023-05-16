@@ -50,7 +50,7 @@ public class CandidateController {
         return "candidateEdit";
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public String updateCandidate(@Valid Candidate candidate, Errors errors) {
         if(errors.hasErrors()) return "candidateEdit";
         candidateService.updateCandidate(candidate);
