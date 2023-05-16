@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
 </head>
 <body>
 <h1>Edytuj kandydata </h1>
@@ -11,54 +11,49 @@
 <br/><br/>
 <form th:action="@{/candidates/{id}(id=${candidate.id})}"
       th:object="${candidate}" th:method="PUT">
-  <div th:if="${#fields.hasErrors()}">
+    <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
                 Usun problemy, sprobuj ponownie
             </span>
-  </div>
-  <table>
-    <tr>
-      <td>ID</td>
-      <td>:</td>
-      <td th:utext="${candidate.id}">ID</td>
-    </tr>
-    <tr>
-      <td>Imie</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{name}" />
-        <span class="validationError"
-              th:if="${#fields.hasErrors('name')}"
-              th:errors="*{name}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>Nazwisko</td>
-      <td>:</td>
-      <td>
-        <input type="text" th:field="*{surname}" />
-        <span class="validationError"
-              th:if="${#fields.hasErrors('surname')}"
-              th:errors="*{surname}"></span>
-      </td>
-    </tr>
-    <tr>
-      <td>Umiejetnosci</td>
-      <td>:</td>
-      <td>
-<!--        <select th:field="*{product}">-->
-<!--          <option th:each="product : ${products}"-->
-<!--                  th:value="${product.id}"-->
-<!--                  th:text="${product}">PRODUKT-->
-<!--          </option>-->
-<!--        </select>-->
-        <span class="validationError"
-              th:if="${#fields.hasErrors('skill')}"
-              th:errors="*{skill}"></span>
-      </td>
-    </tr>
-  </table>
-  <input type="submit" th:value="Aktualizuj" />
+    </div>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>:</td>
+            <td th:utext="${candidate.id}">ID</td>
+        </tr>
+        <tr>
+            <td>Imie</td>
+            <td>:</td>
+            <td>
+                <input type="text" th:field="*{name}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Nazwisko</td>
+            <td>:</td>
+            <td>
+                <input type="text" th:field="*{surname}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('surname')}"
+                      th:errors="*{surname}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Umiejętności</td>
+            <td>:</td>
+            <td>
+            <tr th:each="skill, itemStat : *{skills}">
+                <td><input th:field="*{skills[__${itemStat.index}__].name}"/></td>
+                <td><input th:field="*{skills[__${itemStat.index}__].experience}"/></td>
+            </tr>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" th:value="Aktualizuj"/>
 </form>
 
 <br/>

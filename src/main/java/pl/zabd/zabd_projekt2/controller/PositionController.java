@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import pl.zabd.zabd_projekt2.model.Company;
 import pl.zabd.zabd_projekt2.model.HrLady;
+import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Position;
 import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
 import pl.zabd.zabd_projekt2.model.dto.PositionDto;
@@ -29,6 +30,7 @@ public class PositionController {
     @GetMapping("/form")
     public String addPositionForm(Model model) {
         model.addAttribute("position",new PositionDto());
+        model.addAttribute("skills", IExperience.values());
         return "positionForm";
     }
 

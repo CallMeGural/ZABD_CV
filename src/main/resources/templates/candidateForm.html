@@ -1,167 +1,21 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Nowy kandydat</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Dodaj nowego kandydata</h1>-->
-
-<!--<form method="POST" th:action="@{/candidates}" th:object="${candidate}">-->
-<!--    <label for="name">Imię:</label>-->
-<!--    <input type="text" id="name" th:field="*{name}" required />-->
-
-<!--    <label for="surname">Nazwisko:</label>-->
-<!--    <input type="text" id="surname" th:field="*{surname}" required />-->
-
-<!--    <h3>Dodaj umiejętności:</h3>-->
-<!--    <div id="skillsContainer">-->
-<!--        <div class="skillRow" th:each="skill, skillStatus : *{skills}">-->
-<!--            <input type="text" th:field="*{skills[__${skillStatus.index}__].name}" required />-->
-<!--            <select th:field="*{skills[__${skillStatus.index}__].experience}">-->
-<!--                <option th:each="exp : ${T(pl.zabd.zabd_projekt2.model.IExperience).values()}"-->
-<!--                        th:value="${exp}" th:text="${exp}"></option>-->
-<!--            </select>-->
-<!--            <button type="button" class="removeSkillButton" onclick="removeSkill(this)">Usuń</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <button type="button" onclick="addSkill()">Dodaj umiejętność</button>-->
-
-<!--    <button type="submit">Dodaj kandydata</button>-->
-<!--</form>-->
-
-<!--<script>-->
-<!--    function addSkill() {-->
-<!--        var skillsContainer = document.getElementById("skillsContainer");-->
-<!--        var skillRow = document.createElement("div");-->
-<!--        skillRow.className = "skillRow";-->
-
-<!--        var skillNameInput = document.createElement("input");-->
-<!--        skillNameInput.type = "text";-->
-<!--        skillNameInput.name = "skills[__${candidate.skills.size()}__].name";-->
-<!--        skillNameInput.required = true;-->
-
-<!--        var skillExperienceSelect = document.createElement("select");-->
-<!--        skillExperienceSelect.name = "skills[__${candidate.skills.size()}__].experience";-->
-<!--        var experienceOptions = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];-->
-<!--        for (var i = 0; i < experienceOptions.length; i++) {-->
-<!--            var option = document.createElement("option");-->
-<!--            option.value = experienceOptions[i];-->
-<!--            option.text = experienceOptions[i];-->
-<!--            skillExperienceSelect.appendChild(option);-->
-<!--        }-->
-
-<!--        var removeButton = document.createElement("button");-->
-<!--        removeButton.type = "button";-->
-<!--        removeButton.className = "removeSkillButton";-->
-<!--        removeButton.textContent = "Usuń";-->
-<!--        removeButton.onclick = function() {-->
-<!--            removeSkill(this);-->
-<!--        };-->
-
-<!--        skillRow.appendChild(skillNameInput);-->
-<!--        skillRow.appendChild(skillExperienceSelect);-->
-<!--        skillRow.appendChild(removeButton);-->
-
-<!--        skillsContainer.appendChild(skillRow);-->
-<!--    }-->
-
-<!--    function removeSkill(button) {-->
-<!--        var skillRow = button.parentNode;-->
-<!--        skillRow.parentNode.removeChild(skillRow);-->
-<!--    }-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Nowy kandydat</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Dodaj nowego kandydata</h1>-->
-
-<!--<form method="POST" th:action="@{/candidates}" th:object="${candidate}">-->
-<!--    <label for="name">Imię:</label>-->
-<!--    <input type="text" id="name" th:field="*{name}" required />-->
-
-<!--    <label for="surname">Nazwisko:</label>-->
-<!--    <input type="text" id="surname" th:field="*{surname}" required />-->
-
-<!--    <h3>Dodaj umiejętności:</h3>-->
-<!--    <div id="skillsContainer">-->
-<!--        <div class="skillRow" th:each="skill, skillStatus : *{skills}">-->
-<!--            <input type="text" th:field="*{skills[__${skillStatus.index}__].name}" required />-->
-<!--            <select th:field="*{skills[__${skillStatus.index}__].experience}">-->
-<!--                <option th:each="exp : ${T(pl.zabd.zabd_projekt2.model.IExperience).values()}"-->
-<!--                        th:value="${exp}" th:text="${exp}"></option>-->
-<!--            </select>-->
-<!--            <button type="button" class="removeSkillButton" onclick="removeSkill(this)">Usuń</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <button type="button" onclick="addSkill()">Dodaj umiejętność</button>-->
-
-<!--    <button type="submit">Dodaj kandydata</button>-->
-<!--</form>-->
-
-<!--<script>-->
-<!--    function addSkill() {-->
-<!--        var skillsContainer = document.getElementById("skillsContainer");-->
-<!--        var skillRow = document.createElement("div");-->
-<!--        skillRow.className = "skillRow";-->
-
-<!--        var skillNameInput = document.createElement("input");-->
-<!--        skillNameInput.type = "text";-->
-<!--        skillNameInput.name = "skills[0].name";-->
-<!--        skillNameInput.required = true;-->
-
-<!--        var skillExperienceSelect = document.createElement("select");-->
-<!--        skillExperienceSelect.name = "skills[0].experience";-->
-<!--        var experienceOptions = ["BEGINNER", "INTERMEDIATE", "ADVANCED"];-->
-<!--        for (var i = 0; i < experienceOptions.length; i++) {-->
-<!--            var option = document.createElement("option");-->
-<!--            option.value = experienceOptions[i];-->
-<!--            option.text = experienceOptions[i];-->
-<!--            skillExperienceSelect.appendChild(option);-->
-<!--        }-->
-
-<!--        var removeButton = document.createElement("button");-->
-<!--        removeButton.type = "button";-->
-<!--        removeButton.className = "removeSkillButton";-->
-<!--        removeButton.textContent = "Usuń";-->
-<!--        removeButton.onclick = function() {-->
-<!--            removeSkill(this);-->
-<!--        };-->
-
-<!--        skillRow.appendChild(skillNameInput);-->
-<!--        skillRow.appendChild(skillExperienceSelect);-->
-<!--        skillRow.appendChild(removeButton);-->
-
-<!--        skillsContainer.appendChild(skillRow);-->
-<!--    }-->
-
-<!--    function removeSkill(button) {-->
-<!--        var skillRow = button.parentNode;-->
-<!--        skillRow.parentNode.removeChild(skillRow);-->
-<!--    }-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nowy kandydat</title>
+</head>
+<body>
 <form method="POST" th:action="@{/candidates}" th:object="${candidate}">
     <label for="name">Imię:</label>
-    <input type="text" id="name" th:field="*{name}" required />
+    <input type="text" id="name" th:field="*{name}" required/>
 
     <label for="surname">Nazwisko:</label>
-    <input type="text" id="surname" th:field="*{surname}" required />
+    <input type="text" id="surname" th:field="*{surname}" required/>
 
     <h3>Dodaj umiejętności:</h3>
     <div id="skillsContainer">
         <div class="skillRow" th:each="skill, skillStatus : *{skills}">
-            <input type="text" th:field="*{skills[__${skillStatus.index}__].name}" required />
+            <input type="text" th:field="*{skills[__${skillStatus.index}__].name}" required/>
             <select th:field="*{skills[__${skillStatus.index}__].experience}">
                 <option th:each="exp : ${T(pl.zabd.zabd_projekt2.model.IExperience).values()}"
                         th:value="${exp}" th:text="${exp}"></option>
@@ -174,6 +28,8 @@
 
     <button type="submit">Dodaj kandydata</button>
 </form>
+
+<a th:href="@{/}"><input type="submit" value="Menu"/></a>
 
 <script>
     var skillCount = 0;
@@ -219,6 +75,7 @@
         var skillRow = button.parentNode;
         skillRow.parentNode.removeChild(skillRow);
     }
+
 </script>
-
-
+</body>
+</html>

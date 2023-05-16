@@ -23,5 +23,4 @@ public class Position {
     private String companyName;
     private double salary;
     private List<Skill> skills;
-
 }
