@@ -3,6 +3,7 @@ package pl.zabd.zabd_projekt2.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,15 +13,18 @@ import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
 import pl.zabd.zabd_projekt2.model.dto.SkillDto;
+import pl.zabd.zabd_projekt2.model.dto.SkillForm;
 import pl.zabd.zabd_projekt2.service.CandidateService;
 import pl.zabd.zabd_projekt2.service.SkillService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Controller
 @RequestMapping("/candidates")
 @RequiredArgsConstructor
+@Log
 public class CandidateController {
 
     private final CandidateService candidateService;
@@ -44,6 +48,8 @@ public class CandidateController {
         return "redirect:/candidates/list";
     }
 
+
+
     @GetMapping("/{id}")
     public String getCandidateById(@PathVariable String id,Model model) {
         model.addAttribute("candidate",candidateService.getCandidateById(id));
@@ -64,14 +70,19 @@ public class CandidateController {
     }
 
     @GetMapping("/filter")
-    public String passCanditatesToFilter(Model model) {
-        model.addAttribute("candidates",candidateService.getAllCandidates());
-        model.addAttribute("skills", IExperience.values());
+    public String passCandidatesToFilter(Model model) {
+        SkillForm skillForm = new SkillForm();
+        skillForm.getSkills().add(new Skill());
+        model.addAttribute("skillForm", skillForm);
+        model.addAttribute("exp", IExperience.values());
         return "candidateFilter";
     }
-    @GetMapping
-    public String fetchCandidatesBySkills(@RequestBody List<Skill> dtos, Model model) {
-        model.addAttribute("candidates",candidateService.getCandidatesByCriteria(dtos));
+
+    @PostMapping("/filter")
+    public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
+        ArrayList<Skill> skills = skillForm.getSkills();
+        model.addAttribute("candidates",candidateService.getCandidatesByCriteria(skills));
         return "candidateList";
     }
+
 }
