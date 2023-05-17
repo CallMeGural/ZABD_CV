@@ -71,7 +71,7 @@ public class PositionController {
     @PostMapping("/filter")
     public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
         ArrayList<Skill> skills = skillForm.getSkills();
-        model.addAttribute("candidates",positionService.getPositionsByCriteria(skills));
+        model.addAttribute("positions",positionService.getPositionsByCriteria(skills));
         return "positionList";
     }
 

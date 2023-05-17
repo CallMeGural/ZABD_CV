@@ -29,9 +29,12 @@ public class PositionService {
         position.setName(dto.getName());
         position.setSalary(dto.getSalary());
         position.setSkills(dto.getSkills());
+        //position.setContent(dto.getContent());
+        position.setCompanyName(dto.getCompanyName());
+        position.setHrName(dto.getHrName());
+        position.setHrPhoneNumber(dto.getHrPhoneNumber());
         positionRepository.insert(position);
     }
-
     public Position getPositionById(String id) {
         return positionRepository.findById(id).orElseThrow();
     }
