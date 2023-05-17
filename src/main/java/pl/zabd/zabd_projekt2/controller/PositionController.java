@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import pl.zabd.zabd_projekt2.model.Company;
-import pl.zabd.zabd_projekt2.model.HrLady;
-import pl.zabd.zabd_projekt2.model.IExperience;
-import pl.zabd.zabd_projekt2.model.Position;
+import pl.zabd.zabd_projekt2.model.*;
 import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
 import pl.zabd.zabd_projekt2.model.dto.PositionDto;
+import pl.zabd.zabd_projekt2.model.dto.SkillForm;
 import pl.zabd.zabd_projekt2.service.PositionService;
+
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/positions")
@@ -57,6 +57,22 @@ public class PositionController {
     public String deletePosition(@PathVariable String id) {
         positionService.deletePosition(id);
         return "redirect:/positions/list";
+    }
+
+    @GetMapping("/filter")
+    public String passPositionToFilter(Model model) {
+        SkillForm skillForm = new SkillForm();
+        skillForm.getSkills().add(new Skill());
+        model.addAttribute("skillForm", skillForm);
+        model.addAttribute("exp", IExperience.values());
+        return "positionFilter";
+    }
+
+    @PostMapping("/filter")
+    public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
+        ArrayList<Skill> skills = skillForm.getSkills();
+        model.addAttribute("candidates",positionService.getPositionsByCriteria(skills));
+        return "positionsList";
     }
 
 }
