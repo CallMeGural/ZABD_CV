@@ -72,7 +72,7 @@ public class PositionController {
     public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
         ArrayList<Skill> skills = skillForm.getSkills();
         model.addAttribute("candidates",positionService.getPositionsByCriteria(skills));
-        return "positionsList";
+        return "positionList";
     }
 
 }
