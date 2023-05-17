@@ -1,11 +1,8 @@
 package pl.zabd.zabd_projekt2.model.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +11,11 @@ public class CandidateDto {
     private String surname;
     private String phoneNumber;
     private boolean isStudent;
-    private List<Skill> skills;
+    private List<String> skills;
+
+    public CandidateDto() {
+        this.skills = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
@@ -48,11 +49,22 @@ public class CandidateDto {
         isStudent = student;
     }
 
-    public List<Skill> getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skill> skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
+    }
+
+    @Override
+    public String toString() {
+        return "CandidateDto{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", isStudent=" + isStudent +
+                ", skills=" + skills +
+                '}';
     }
 }

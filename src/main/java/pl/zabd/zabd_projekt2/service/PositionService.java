@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import pl.zabd.zabd_projekt2.model.Candidate;
 import pl.zabd.zabd_projekt2.model.Position;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.PositionDto;
@@ -60,10 +61,20 @@ public class PositionService {
         Criteria[] criteria = new Criteria[skills.size()];
         for(int i=0;i<skills.size();i++) {
             criteria[i] = Criteria.where("skills.name").is(skills.get(i).getName())
-                    .and("skills.experience").gte(skills.get(i).getExperience());
+                    .and("skills.experience").is(skills.get(i).getExperience());
         }
         Criteria queryCriteria = new Criteria().andOperator(criteria);
         Query query = Query.query(queryCriteria);
         return mongoTemplate.find(query, Position.class);
+    }
+
+    public List<Candidate> findByCriteria(List<Skill> skills) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("skills")
+                        .elemMatch(Criteria.where("name").in(skills)))
+                .addCriteria(Criteria.where("$expr")
+                        .gt(Criteria.where("skills").size(1)));
+
+        return mongoTemplate.find(query, Candidate.class);
     }
 }

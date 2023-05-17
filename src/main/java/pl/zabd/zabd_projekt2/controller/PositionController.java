@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import pl.zabd.zabd_projekt2.model.*;
-import pl.zabd.zabd_projekt2.model.dto.HrLadyDto;
+
+import pl.zabd.zabd_projekt2.model.IExperience;
+import pl.zabd.zabd_projekt2.model.Position;
+import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.PositionDto;
 import pl.zabd.zabd_projekt2.model.dto.SkillForm;
 import pl.zabd.zabd_projekt2.service.PositionService;
@@ -48,7 +50,7 @@ public class PositionController {
 
     @PutMapping("/{id}")
     public String updatePosition(@Valid Position position, Errors errors) {
-        if(errors.hasErrors()) return "companyEdit";
+        if(errors.hasErrors()) return "positionEdit";
         positionService.updatePosition(position);
         return "redirect:/positions/list";
     }
@@ -72,7 +74,14 @@ public class PositionController {
     public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
         ArrayList<Skill> skills = skillForm.getSkills();
         model.addAttribute("positions",positionService.getPositionsByCriteria(skills));
-        return "positionsList";
+        return "positionList";
+    }
+
+    @PostMapping("/{id}")
+    public String passPositionSkills(@PathVariable String id,Model model) {
+        Position position = positionService.getPositionById(id);
+        model.addAttribute("candidates",positionService.findByCriteria(position.getSkills()));
+        return "candidateList";
     }
 
 }

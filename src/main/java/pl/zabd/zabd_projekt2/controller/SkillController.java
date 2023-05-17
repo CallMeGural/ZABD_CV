@@ -5,38 +5,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
-import pl.zabd.zabd_projekt2.model.dto.SkillDto;
-import pl.zabd.zabd_projekt2.service.SkillService;
+import pl.zabd.zabd_projekt2.repository.SkillRepository;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/skills")
 public class SkillController {
 
-    private final SkillService skillService;
+    private final SkillRepository skillRepository;
 
-    @GetMapping("/list")
-    public String fetchAllSkills(Model model) {
-        model.addAttribute("skills",skillService.getAllSkills());
-        return "skillList";
-    }
 
-    @GetMapping("/form")
-    public String addSkillForm(Model model) {
-        model.addAttribute("skill",new SkillDto());
+    @GetMapping
+    public String skillForm(Model model) {
+        model.addAttribute("skill",new Skill());
         return "skillForm";
     }
 
     @PostMapping
-    public String addSkill(SkillDto dto) {
-        skillService.addSkill(dto);
-        return "redirect:/skills/list";    }
-
-    @PutMapping
-    public Skill updateSkill(Skill skill) {
-        return  skillService.updateSkill(skill);
+    public String addSkill(Skill skill) {
+        for(IExperience exp : IExperience.values()) {
+            skillRepository.insert(new Skill(skill.getName(),exp));
+        }
+        return "redirect:/";
     }
 }

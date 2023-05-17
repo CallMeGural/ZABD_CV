@@ -12,10 +12,9 @@ import pl.zabd.zabd_projekt2.model.Candidate;
 import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
-import pl.zabd.zabd_projekt2.model.dto.SkillDto;
 import pl.zabd.zabd_projekt2.model.dto.SkillForm;
+import pl.zabd.zabd_projekt2.repository.SkillRepository;
 import pl.zabd.zabd_projekt2.service.CandidateService;
-import pl.zabd.zabd_projekt2.service.SkillService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,7 @@ import java.util.List;
 public class CandidateController {
 
     private final CandidateService candidateService;
+    private final SkillRepository skillRepository;
 
     @GetMapping("/list")
     public String fetchAllCandidates(Model model) {
@@ -38,12 +38,15 @@ public class CandidateController {
     @GetMapping("/form")
     public String addCandidateForm(Model model) {
         model.addAttribute("candidate",new CandidateDto());
-        model.addAttribute("skills", IExperience.values());
+        log.info(skillRepository.findAll().toString());
+        List<Skill> skills = new ArrayList<>(skillRepository.findAll());
+        model.addAttribute("skills",skills);
         return "candidateForm";
     }
 
     @PostMapping
     public String addCandidate(CandidateDto dto) {
+        dto.getSkills().forEach(skill -> log.info(skill));
         candidateService.addCandidate(dto);
         return "redirect:/candidates/list";
     }

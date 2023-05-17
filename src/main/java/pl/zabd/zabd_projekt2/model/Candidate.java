@@ -11,10 +11,11 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Document
 public class Candidate {
@@ -27,6 +28,10 @@ public class Candidate {
     private String phoneNumber;
     private boolean isStudent;
     private List<Skill> skills;
+
+    public Candidate() {
+        this.skills=new ArrayList<>();
+    }
 
     public String getId() {
         return id;

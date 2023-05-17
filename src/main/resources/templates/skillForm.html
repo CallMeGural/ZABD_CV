@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="POST" th:action="@{/skills}" th:object="${skill}">
+    <label for="name">Imię:</label>
+    <input type="text" id="name" th:field="*{name}" required/>
+
+    <button type="submit">Dodaj umiejętność</button>
+</form>
+
+<a th:href="@{/}"><input type="submit" value="Menu"/></a>
+
+</body>
+</html>
