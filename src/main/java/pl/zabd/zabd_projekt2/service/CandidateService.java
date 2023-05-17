@@ -49,7 +49,8 @@ public class CandidateService {
 
     public void updateCandidate(Candidate candidate) {
         Candidate update = getCandidateById(candidate.getId());
-        update.setSkills(candidate.getSkills());
+        if(candidate.getSkills().size()>0)
+            update.setSkills(candidate.getSkills());
         update.setName(candidate.getName());
         update.setSurname(candidate.getSurname());
         update.setPhoneNumber(candidate.getPhoneNumber());

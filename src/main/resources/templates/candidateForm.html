@@ -1,42 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Nowy kandydat</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<form method="POST" th:action="@{/candidates}" th:object="${candidate}">-->
-<!--    <label for="name">Imię:</label>-->
-<!--    <input type="text" id="name" th:field="*{name}" required/>-->
-
-<!--    <label for="surname">Nazwisko:</label>-->
-<!--    <input type="text" id="surname" th:field="*{surname}" required/>-->
-
-<!--    <label for="surname">Numer telefonu:</label>-->
-<!--    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>-->
-
-<!--    <label for="surname">Status studenta:</label>-->
-<!--    <select th:field="*{isStudent}">-->
-<!--        <option th:value="1" >true</option>-->
-<!--        <option th:value="0" >false</option>-->
-<!--    </select>-->
-
-<!--    <h3>Dodaj umiejętności:</h3>-->
-<!--    <select multiple="multiple" th:field="*{skills}" th:size="${skills.size()}">-->
-<!--        <option th:each="option : ${skills}"-->
-<!--                th:value="${option}"-->
-<!--                th:selected="${candidate.skills != null and candidate.skills.contains(option)}"-->
-<!--                th:text="${option.name} + ' : ' + ${option.experience}"></option>-->
-<!--    </select>-->
-
-<!--    <button type="submit">Dodaj kandydata</button>-->
-<!--</form>-->
-
-<!--<a th:href="@{/}"><input type="submit" value="Menu"/></a>-->
-
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -56,6 +17,8 @@
 
     <label for="isStudent">Is Student:</label>
     <input type="checkbox" id="isStudent" name="isStudent" th:field="*{isStudent}"><br><br>
+
+    <h3>Dodaj umiejętności:</h3>
 
     <select th:field="*{skills}" multiple>
         <option th:each="skill : ${skills}"

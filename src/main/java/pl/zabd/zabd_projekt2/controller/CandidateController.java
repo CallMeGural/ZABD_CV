@@ -12,7 +12,6 @@ import pl.zabd.zabd_projekt2.model.Candidate;
 import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
-import pl.zabd.zabd_projekt2.model.dto.SkillForm;
 import pl.zabd.zabd_projekt2.repository.SkillRepository;
 import pl.zabd.zabd_projekt2.service.CandidateService;
 
@@ -46,7 +45,6 @@ public class CandidateController {
 
     @PostMapping
     public String addCandidate(CandidateDto dto) {
-        dto.getSkills().forEach(skill -> log.info(skill));
         candidateService.addCandidate(dto);
         return "redirect:/candidates/list";
     }
@@ -56,6 +54,8 @@ public class CandidateController {
     @GetMapping("/{id}")
     public String getCandidateById(@PathVariable String id,Model model) {
         model.addAttribute("candidate",candidateService.getCandidateById(id));
+        List<Skill> skills = new ArrayList<>(skillRepository.findAll());
+        model.addAttribute("skills",skills);
         return "candidateEdit";
     }
 
@@ -72,20 +72,6 @@ public class CandidateController {
         return "redirect:/candidates/list";
     }
 
-    @GetMapping("/filter")
-    public String passCandidatesToFilter(Model model) {
-        SkillForm skillForm = new SkillForm();
-        skillForm.getSkills().add(new Skill());
-        model.addAttribute("skillForm", skillForm);
-        model.addAttribute("exp", IExperience.values());
-        return "candidateFilter";
-    }
 
-    @PostMapping("/filter")
-    public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
-        ArrayList<Skill> skills = skillForm.getSkills();
-        model.addAttribute("candidates",candidateService.getCandidatesByCriteria(skills));
-        return "candidateList";
-    }
 
 }

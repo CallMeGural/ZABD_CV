@@ -21,5 +21,5 @@ public class PositionDto {
     private String companyName;
     private double salary;
     private String content;
-    private List<Skill> skills;
+    private List<String> skills;
 }

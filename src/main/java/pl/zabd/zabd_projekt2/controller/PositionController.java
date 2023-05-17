@@ -7,14 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import pl.zabd.zabd_projekt2.model.IExperience;
 import pl.zabd.zabd_projekt2.model.Position;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.PositionDto;
-import pl.zabd.zabd_projekt2.model.dto.SkillForm;
+import pl.zabd.zabd_projekt2.repository.SkillRepository;
 import pl.zabd.zabd_projekt2.service.PositionService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/positions")
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class PositionController {
 
     private final PositionService positionService;
+    private final SkillRepository skillRepository;
 
     @GetMapping("/list")
     public String fetchPositions(Model model) {
@@ -32,7 +33,8 @@ public class PositionController {
     @GetMapping("/form")
     public String addPositionForm(Model model) {
         model.addAttribute("position",new PositionDto());
-        model.addAttribute("skills", IExperience.values());
+        List<Skill> skills = new ArrayList<>(skillRepository.findAll());
+        model.addAttribute("skills",skills);
         return "positionForm";
     }
 
@@ -45,6 +47,8 @@ public class PositionController {
     @GetMapping("/{id}")
     public String getPositionById(@PathVariable String id, Model model) {
         model.addAttribute("position",positionService.getPositionById(id));
+        List<Skill> skills = new ArrayList<>(skillRepository.findAll());
+        model.addAttribute("skills",skills);
         return "positionEdit";
     }
 
@@ -59,22 +63,6 @@ public class PositionController {
     public String deletePosition(@PathVariable String id) {
         positionService.deletePosition(id);
         return "redirect:/positions/list";
-    }
-
-    @GetMapping("/filter")
-    public String passPositionToFilter(Model model) {
-        SkillForm skillForm = new SkillForm();
-        skillForm.getSkills().add(new Skill());
-        model.addAttribute("skillForm", skillForm);
-        model.addAttribute("exp", IExperience.values());
-        return "positionFilter";
-    }
-
-    @PostMapping("/filter")
-    public String passSkills(@ModelAttribute("skillForm") SkillForm skillForm, Model model) {
-        ArrayList<Skill> skills = skillForm.getSkills();
-        model.addAttribute("positions",positionService.getPositionsByCriteria(skills));
-        return "positionList";
     }
 
     @PostMapping("/{id}")
