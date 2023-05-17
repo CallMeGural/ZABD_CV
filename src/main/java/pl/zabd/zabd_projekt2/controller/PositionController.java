@@ -48,7 +48,7 @@ public class PositionController {
 
     @PutMapping("/{id}")
     public String updatePosition(@Valid Position position, Errors errors) {
-        if(errors.hasErrors()) return "companyEdit";
+        if(errors.hasErrors()) return "positionEdit";
         positionService.updatePosition(position);
         return "redirect:/positions/list";
     }
