@@ -163,6 +163,16 @@
               th:errors="*{hrPhoneNumber}"></span>
       </td>
     </tr>
+    <tr>
+      <td>Opis stanowiska</td>
+      <td>:</td>
+      <td>
+        <textarea rows="5" cols="40" th:field="*{content}"></textarea>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('content')}"
+              th:errors="*{content}"></span>
+      </td>
+    </tr>
     <h3>Dodaj umiejętności:</h3>
     <div id="skillsContainer">
       <div class="skillRow" th:each="skill, skillStatus : *{skills}">

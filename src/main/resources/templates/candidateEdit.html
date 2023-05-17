@@ -103,6 +103,26 @@
                       th:errors="*{surname}"></span>
             </td>
         </tr>
+        <tr>
+            <td>Numer telefonu</td>
+            <td>:</td>
+            <td>
+                <input type="text" th:field="*{phoneNumber}"/>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('phoneNumber')}"
+                      th:errors="*{phoneNumber}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Status studenta</td>
+            <td>:</td>
+            <td>
+                <select th:field="*{isStudent}">
+                    <option th:value="true" th:text="Tak"></option>
+                    <option th:value="false" th:text="Nie"></option>
+                </select>
+            </td>
+        </tr>
         <h3>Dodaj umiejętności:</h3>
         <div id="skillsContainer">
             <div class="skillRow" th:each="skill, skillStatus : *{skills}">

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import pl.zabd.zabd_projekt2.model.Candidate;
 import pl.zabd.zabd_projekt2.model.Skill;
 import pl.zabd.zabd_projekt2.model.dto.CandidateDto;
-import pl.zabd.zabd_projekt2.model.dto.SkillDto;
 import pl.zabd.zabd_projekt2.repository.CandidateRepository;
 
 import java.util.List;
@@ -29,6 +28,8 @@ public class CandidateService {
         candidate.setName(dto.getName());
         candidate.setSurname(dto.getSurname());
         candidate.setSkills(dto.getSkills());
+        candidate.setPhoneNumber(dto.getPhoneNumber());
+        candidate.setIsStudent(dto.getIsStudent());
         return  candidateRepository.insert(candidate);
     }
 
@@ -45,12 +46,13 @@ public class CandidateService {
         update.setSkills(candidate.getSkills());
         update.setName(candidate.getName());
         update.setSurname(candidate.getSurname());
+        update.setPhoneNumber(candidate.getPhoneNumber());
+        update.setIsStudent(candidate.getIsStudent());
         candidateRepository.save(update);
 
     }
 
     public List<Candidate> getCandidatesByCriteria(List<Skill> skills) {
-//        return candidateRepository.findBySkillsInAndSkillLevelGreaterThanEqual(skills);
         Criteria[] criteria = new Criteria[skills.size()];
         for(int i=0;i<skills.size();i++) {
             criteria[i] = Criteria.where("skills.name").is(skills.get(i).getName())

@@ -12,6 +12,15 @@
     <label for="surname">Nazwisko:</label>
     <input type="text" id="surname" th:field="*{surname}" required/>
 
+    <label for="surname">Numer telefonu:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>
+
+    <label for="surname">Status studenta:</label>
+    <select th:field="*{isStudent}">
+        <option th:value="1" >true</option>
+        <option th:value="0" >false</option>
+    </select>
+
     <h3>Dodaj umiejętności:</h3>
     <div id="skillsContainer">
         <div class="skillRow" th:each="skill, skillStatus : *{skills}">

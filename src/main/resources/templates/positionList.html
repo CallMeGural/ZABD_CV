@@ -14,6 +14,7 @@
         <th>Nazwa firmy</th>
         <th>Nazwa HR</th>
         <th>Nr telefonu HR</th>
+        <th>Treść ogłoszenia</th>
         <th>Umiejetnosci</th>
         <th>Edytuj</th>
         <th>Usuń</th>
@@ -24,6 +25,8 @@
         <td th:text="${position.companyName}">COMPANY</td>
         <td th:text="${position.hrName}">HR</td>
         <td th:text="${position.hrPhoneNumber}">HR PHONE</td>
+        <td th:text="${position.content}">Kontent</td>
+
         <td>
             <ul>
                 <li th:each="skill : ${position.skills}">

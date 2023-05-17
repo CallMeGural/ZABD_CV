@@ -11,6 +11,8 @@
     <tr>
         <th>Imię</th>
         <th>Nazwisko</th>
+        <th>Numer telefonu</th>
+        <th>Czy student</th>
         <th>Umiejętności</th>
         <th>Edytuj</th>
         <th>Usuń</th>
@@ -20,6 +22,8 @@
     <tr th:each="candidate : ${candidates}">
         <td th:text="${candidate.name}"></td>
         <td th:text="${candidate.surname}"></td>
+        <td th:text="${candidate.phoneNumber}"></td>
+        <td th:text="${candidate.isStudent}"></td>
         <td>
             <ul>
                 <li th:each="skill : ${candidate.skills}">

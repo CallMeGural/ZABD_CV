@@ -45,6 +45,12 @@
           th:if="${#fields.hasErrors('hrPhoneNumber')}"
           th:errors="*{hrPhoneNumber}"></span>
     <br/>
+    <label for="content">Treść ogłoszenia: </label>
+    <textarea rows="5" cols="40" th:field="*{content}"></textarea>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('content')}"
+          th:errors="*{content}"></span>
+    <br/>
     <h3>Dodaj umiejętności:</h3>
     <div id="skillsContainer">
         <div class="skillRow" th:each="skill, skillStatus : *{skills}">
