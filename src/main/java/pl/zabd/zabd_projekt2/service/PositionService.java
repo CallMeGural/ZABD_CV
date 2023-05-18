@@ -1,6 +1,7 @@
 package pl.zabd.zabd_projekt2.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -13,13 +14,16 @@ import pl.zabd.zabd_projekt2.repository.CandidateRepository;
 import pl.zabd.zabd_projekt2.repository.PositionRepository;
 import pl.zabd.zabd_projekt2.repository.SkillRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log
 public class PositionService {
 
     private final PositionRepository positionRepository;
+    private final CandidateRepository candidateRepository;
     private final MongoTemplate mongoTemplate;
     private final SkillRepository skillRepository;
 
@@ -75,9 +79,26 @@ public class PositionService {
         return mongoTemplate.find(query, Position.class);
     }
 
+
+
     public List<Candidate> findByCriteria(List<Skill> skills) {
-        Criteria criteria = Criteria.where("skills").in(skills).size(2);
-        Query query = new Query(criteria);
-        return mongoTemplate.find(query, Candidate.class);
+        List<Candidate> allCandidates = candidateRepository.findAll();
+        List<Candidate> matchedCandidates = new ArrayList<>();
+        log.info(skills.toString()+"\n\n");
+        allCandidates.forEach(
+                candidate -> {
+                    log.info(candidate.getName() +" "+candidate.getSkills().toString());
+                    int matches = 0;
+                    for(Skill skill : candidate.getSkills()) {
+                        for(Skill positionSkill : skills) {
+                            if(skill.getName().equals(positionSkill.getName()) && skill.getExperience()==positionSkill.getExperience()) matches++;
+                        }
+                    }
+                    log.info(String.valueOf(matches));
+                    if(matches>=2) matchedCandidates.add(candidate);
+                }
+        );
+
+        return matchedCandidates;
     }
 }
